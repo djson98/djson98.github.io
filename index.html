@@ -6,13 +6,25 @@
   <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
   <script src="https://kit.fontawesome.com/1d7a1a994b.js" crossorigin="anonymous"></script>
   <script src="custom.js"></script>
-
+  
+  <link rel="stylesheet" href="style.css">
   <script>
     $(document).ready(function() { 
     $('.navbar_toggle').click ( function () {
       $('.navbar_menu').toggle('atcive');
-
     });
+    
+    $('.menu_interest').click (function(){
+      $('#page_interest').show().siblings().hide();
+    });
+    $('.menu_home').click (function(){
+      $('#page_home').show().siblings().hide();
+    });
+    $('.menu_other').click (function(){
+      $('#page_other').show().siblings().hide();
+    });
+        
+
 
     });
   </script>
@@ -34,37 +46,38 @@
 </style>
 
 
-<link rel="stylesheet" href="./style.css"/>
 </head>
 <body>
 
     <nav class="navbar">
       <div class="navbar_name">
         <p> Dongju, Son </p>
-
       </div>
       <ul class="navbar_menu">
-        <li><a href=""> home </a></li>
-        <li><a href=""> interest </a></li>
-        <li><a href=""> other </a></li>
+        <li><a href="#" class="menu_home"> home </a></li>
+        <li><a href="#" class="menu_interest"> interest </a></li>
+        <li><a href="#" class="menu_other"> other </a></li>
       </ul>
-
       <a href="#" class="navbar_toggle">
         <i class="fas fa-solid fa-bars"></i>
       </a>
-
     </nav>
-    <div class="container">
 
-      <div class="secton" >
-        <h1>1 번째 페이지 입니다 </h1>
-        <p>내용 입니다 내용 입니다 내용 입니다 내용 입니다 </p>
+    <div class="container" >
+
+      <div class="secton" id="page_home">
+        <img src="http://placehold.it/300x300" class ="pic">
+
+        <h1>Dongju Son </h1>
+        
+        <p>I am majoring in Computer Science at Kangwon National University.</p>
       </div>
-      <div class="secton" id="page_2" >
-        <h1>2번째 페이지 입니다 </h1>
-        <p>내용 입니다 내용 입니다 내용 입니다 내용 입니다 </p>
+
+      <div class="secton" id="page_interest" >
+        <h1>Interest </h1>
+        <p>I love skateboarding.</p>
       </div>
-      <div class="secton" id="page_2" >
+      <div class="secton" id="page_other" >
         <h1>3번째 페이지 입니다 </h1>
         <p>내용 입니다 내용 입니다 내용 입니다 내용 입니다 </p>
       </div>
