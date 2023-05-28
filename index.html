@@ -6,14 +6,23 @@
   <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
   <script src="https://kit.fontawesome.com/1d7a1a994b.js" crossorigin="anonymous"></script>
   <script src="custom.js"></script>
-  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Noto+Sans+KR&family=Open+Sans:ital@1&display=swap" rel="stylesheet">
+    
   <link rel="stylesheet" href="style.css">
   <script>
     $(document).ready(function() { 
-    $('.navbar_toggle').click ( function () {
-      $('.navbar_menu').toggle('atcive');
-    });
     
+    /* 햄버거 메뉴. */
+    $('.navbar_toggle') .click ( function (){
+      $('.navbar_menu').toggleClass('active');
+    });
+
+    /*SPA */
     $('.menu_interest').click (function(){
       $('#page_interest').show().siblings().hide();
     });
@@ -22,6 +31,7 @@
     });
     $('.menu_other').click (function(){
       $('#page_other').show().siblings().hide();
+
     });
         
 
@@ -30,18 +40,23 @@
   </script>
   
   <style>
+    
     * { margin:0; padding: 0;}
-    body {width: 960px; margin: 0 auto; overflow: hidden; }
+    body {width: 960px; margin: 0 auto; overflow-x: hidden; }
     .header { width: 260px; float: left;}
     #section { width: 700px; float: right; }
 
     @media screen and (max-width: 767px) {
       body { width: auto }
       .header { width: auto; float: none; }
-      #section { width: auto; float: none; }
+      .section { width: auto; float: none; }
     }
 
-
+    p{
+    font-family: 'Montserrat', sans-serif;
+    font-size:  20px;
+    line-height: 1.5;
+  }
 
 </style>
 
@@ -58,19 +73,33 @@
         <li><a href="#" class="menu_interest"> interest </a></li>
         <li><a href="#" class="menu_other"> other </a></li>
       </ul>
+      <div class="navbar_test"></div>
       <a href="#" class="navbar_toggle">
         <i class="fas fa-solid fa-bars"></i>
       </a>
+      
     </nav>
 
     <div class="container" >
 
+      <!-- 페이지 Home -->
       <div class="secton" id="page_home">
-        <img src="http://placehold.it/300x300" class ="pic">
-
-        <h1>Dongju Son </h1>
         
-        <p>I am majoring in Computer Science at Kangwon National University.</p>
+        
+        <img src="http://placehold.it/300x300" class ="pic">
+        <div class ="middle"> 
+           <div class="left"></div>
+           <div class="right">
+              <h1>Dongju Son </h1>
+              <p>I am majoring in Computer Science at Kangwon National University. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
+              <br>
+              <h1>Lorem Ipsum</h1>
+              <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
+            </div>
+        <div class="bottom">  
+
+      </div>
+      </div>
       </div>
 
       <div class="secton" id="page_interest" >
@@ -78,8 +107,14 @@
         <p>I love skateboarding.</p>
       </div>
       <div class="secton" id="page_other" >
-        <h1>3번째 페이지 입니다 </h1>
-        <p>내용 입니다 내용 입니다 내용 입니다 내용 입니다 </p>
+        <h1>Activity</h1>
+
+        Departmant of Computer Science ,Kangwon National University <br>
+        <strong>GPA </strong> 4.5/ 4.5 <a href="#"></a><br>
+        <strong>Scholarship</strong> 7,602,000 KRW <br>  
+        <strong>Awards</strong> 좋은수업에세이, 2022 summer<br>
+        
+        <P> </P>
       </div>
 
 
@@ -87,8 +122,10 @@
     </div>
 
 
-    <footer class="footer"> 
-      <p> Copyright @ Dongju, Son (djson@kangwon.ac.kr). All Rights Reserved.</p>
+    <footer class="footer text-center"> 
+      <hr>
+      <p> Copyright @ <strong>Dongju Son</strong> All Rights Reserved.</p>
+      <p> djson@kangwon.ac.kr</p>
     </footer>
 
   </body>
