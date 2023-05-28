@@ -14,7 +14,7 @@ a{
     display : flex;
     justify-content: space-between; 
     align-items: center;
-    background-color :honeydew;
+    /*background-color :coral;*/
     padding: 8px 12px;
 }
 
@@ -42,7 +42,9 @@ a{
     font-size:24px;
 }
 
-
+#page_interest, #page_other { 
+    display : none;
+} 
 
 
 
@@ -70,5 +72,12 @@ a{
 
     .navbar_menu.active  {
         display : flex;
+    }
+
+
+    .pic {
+        width : 100%;
+        left: 50%; top: 50%;
+        
     }
 }
