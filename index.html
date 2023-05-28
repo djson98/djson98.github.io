@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dongju, Son </title>
+  <meta name="viewport" content="user-scalable=no,initial-scale=1,maximum-scale=1">
+  <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+  <script src="https://kit.fontawesome.com/1d7a1a994b.js" crossorigin="anonymous"></script>
+  <script src="custom.js"></script>
+
+  <script>
+    $(document).ready(function() { 
+    $('.navbar_toggle').click ( function () {
+      $('.navbar_menu').toggle('atcive');
+
+    });
+
+    });
+  </script>
+  
+  <style>
+    * { margin:0; padding: 0;}
+    body {width: 960px; margin: 0 auto; overflow: hidden; }
+    .header { width: 260px; float: left;}
+    #section { width: 700px; float: right; }
+
+    @media screen and (max-width: 767px) {
+      body { width: auto }
+      .header { width: auto; float: none; }
+      #section { width: auto; float: none; }
+    }
+
+
+
+</style>
+
+
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+    <nav class="navbar">
+      <div class="navbar_name">
+        <p> Dongju, Son </p>
+
+      </div>
+      <ul class="navbar_menu">
+        <li><a href=""> home </a></li>
+        <li><a href=""> interest </a></li>
+        <li><a href=""> other </a></li>
+      </ul>
+
+      <a href="#" class="navbar_toggle">
+        <i class="fas fa-solid fa-bars"></i>
+      </a>
+
+    </nav>
+    <div class="container">
+
+      <div class="secton" >
+        <h1>1 번째 페이지 입니다 </h1>
+        <p>내용 입니다 내용 입니다 내용 입니다 내용 입니다 </p>
+      </div>
+      <div class="secton" id="page_2" >
+        <h1>2번째 페이지 입니다 </h1>
+        <p>내용 입니다 내용 입니다 내용 입니다 내용 입니다 </p>
+      </div>
+      <div class="secton" id="page_2" >
+        <h1>3번째 페이지 입니다 </h1>
+        <p>내용 입니다 내용 입니다 내용 입니다 내용 입니다 </p>
+      </div>
+
+
+
+    </div>
+
+
+    <footer class="footer"> 
+      <p> Copyright @ Dongju, Son (djson@kangwon.ac.kr). All Rights Reserved.</p>
+    </footer>
+
+  </body>
+  </html>
+  
