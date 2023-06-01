@@ -12,29 +12,58 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Noto+Sans+KR&family=Open+Sans:ital@1&display=swap" rel="stylesheet">
-    
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <script>
     $(document).ready(function() { 
-    
+
     /* 햄버거 메뉴. */
     $('.navbar_toggle') .click ( function (){
-      $('.navbar_menu').toggleClass('active');
+      $('.navbar_menu').animate().toggleClass('active');
     });
+
 
     /*SPA */
     $('.menu_interest').click (function(){
-      $('#page_interest').show().siblings().hide();
+      $('#page_interest').css('display','block') ; 
+      $('#page_interest').siblings().css('display','none');
+      $(this).css("fontWeight", "bold"); 
+      $(this).siblings().css("fontWeight", "normal");
     });
+/*
+    $('.menu_interest').click (function(){
+      $('#page_interest').show().siblings().hide();
+      $(this).css("fontWeight", "bold"); 
+      $(this).siblings().css("fontWeight", "normal");
+    }); */
     $('.menu_home').click (function(){
       $('#page_home').show().siblings().hide();
+      $(this).css("fontWeight", "bold"); 
+      $(this).siblings().css("fontWeight", "normal");
     });
     $('.menu_other').click (function(){
       $('#page_other').show().siblings().hide();
-
+      $(this).css("fontWeight", "bold"); 
+      $(this).siblings().css("fontWeight", "normal");
     });
-        
+    /* 메뉴 hover */
+    $('.menu')
+    .mouseenter(function(){ $(this).css({background:'rgb(178, 202, 255)'});})
+    .mouseleave(function(){ $(this).css({background:'white',opacity:1});})
+    ;
 
+    /* test*/
+
+    /*
+    pages.each ( function (index,item) 
+    {
+      alert( item.innerHTML ) ;
+      $(item);
+    }
+    ) ; 
+*/  
 
     });
   </script>
@@ -42,19 +71,24 @@
   <style>
     
     * { margin:0; padding: 0;}
-    body {width: 960px; margin: 0 auto; overflow-x: hidden; }
+    body {
+      width: 960px; margin: 0 auto; overflow-x: hidden; position: relative;}
     .header { width: 260px; float: left;}
     #section { width: 700px; float: right; }
-
     @media screen and (max-width: 767px) {
       body { width: auto }
       .header { width: auto; float: none; }
       .section { width: auto; float: none; }
     }
-
+    h2{ 
+      font-family: 'League Spartan', sans-serif;
+      font-weight: 900;
+      font-size: 2.5em;
+      
+    }
     p{
     font-family: 'Montserrat', sans-serif;
-    font-size:  20px;
+    font-size:  24px;
     line-height: 1.5;
   }
 
@@ -69,63 +103,73 @@
         <p> Dongju, Son </p>
       </div>
       <ul class="navbar_menu">
-        <li><a href="#" class="menu_home"> home </a></li>
-        <li><a href="#" class="menu_interest"> interest </a></li>
-        <li><a href="#" class="menu_other"> other </a></li>
+        <li  class="menu_home menu"  ><a href="#" id="home"> Home </a></li>
+        <li class="menu_interest menu" ><a href="#" id="interest"> Interest </a></li>
+        <li class="menu_other menu" ><a href="#"id="other"  > Other </a></li>
       </ul>
       <div class="navbar_test"></div>
       <a href="#" class="navbar_toggle">
         <i class="fas fa-solid fa-bars"></i>
       </a>
-      
     </nav>
-
+    <div class="sep_bar"></div>
     <div class="container" >
 
       <!-- 페이지 Home -->
-      <div class="secton" id="page_home">
-        
-        
-        <img src="http://placehold.it/300x300" class ="pic">
+      <div class="section" id="page_home">      
         <div class ="middle"> 
-           <div class="left"></div>
+           <div class="left">
+            <img src="http://placehold.it/350x300" class ="pic">
+           </div>
            <div class="right">
-              <h1>Dongju Son </h1>
-              <p>I am majoring in Computer Science at Kangwon National University. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
-              <br>
-              <h1>Lorem Ipsum</h1>
-              <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
-            </div>
+              <h2>Dongju Son </h2>
+              <hr>
+              <p> 
+                I'm majoring Computer Science At the <a href="https://cse.kangwon.ac.kr/cse/index.do">Kangwon National University</a>.
+                I've recently become interested in classes such as Data Structures, Web, and Linux Programming.  
+                I'm in college to figure out what I want to accomplish with my life.
+              </p>
+              <h2> Ability</h2>
+              <hr>
+              <p> 
+                I am currently in my second year At the Kangwon National University.
+                I am a student in the Department of Computer Science. 
+                I am impressed by the progress of technology, which is what drew me to choose this major. 
+                I'm now interested in data structure and web development classes.
+              </p>
+              </div>
+
+        </div>
         <div class="bottom">  
-
+        
+        </div>
       </div>
-      </div>
-      </div>
-
-      <div class="secton" id="page_interest" >
-        <h1>Interest </h1>
+      <!-- 페이지 interest -->
+      <div class="section" id="page_interest" >
+        <h2>Interest </h2>
+        <hr>
         <p>I love skateboarding.</p>
       </div>
-      <div class="secton" id="page_other" >
-        <h1>Activity</h1>
-
-        Departmant of Computer Science ,Kangwon National University <br>
-        <strong>GPA </strong> 4.5/ 4.5 <a href="#"></a><br>
-        <strong>Scholarship</strong> 7,602,000 KRW <br>  
-        <strong>Awards</strong> 좋은수업에세이, 2022 summer<br>
+      <!-- 페이지 other -->
+      <div class="section" id="page_other" >
+        <h2>Activity</h2>
+        <hr>
+        <p>Departmant of Computer Science ,Kangwon National University </p>
+        <p><strong>GPA </strong>: 4.5/ 4.5 <a href="#"></a></p> <br>
+        <p><strong>Scholarship</strong> 7,602,000 KRW <br> 
+        <p> Merit-Based Scholarship 2022 (Spring, Fall), 2023 (Spring)</p> <br>
+        <p><strong>Awards</strong><br> Good Lecture Essay Contest, 2022 summer<br></p> 
+        
         
         <P> </P>
       </div>
-
-
-
     </div>
 
-
+      <!-- footer-->
     <footer class="footer text-center"> 
       <hr>
       <p> Copyright @ <strong>Dongju Son</strong> All Rights Reserved.</p>
-      <p> djson@kangwon.ac.kr</p>
+      <p><i class="fa-solid fa-envelope"></i>  <a href="mailto:djson@kangwon.ac.kr"> djson@kangwon.ac.kr</a> </p>
     </footer>
 
   </body>
