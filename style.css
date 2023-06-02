@@ -11,7 +11,7 @@
     height: 2px;
 }
 
-
+li {list-style-type: none;}
 
 /* 푸터 */
 footer{
@@ -25,7 +25,7 @@ footer{
 body{
     margin:0 auto;
     width : 95%;
-    min-height: 100%;
+
 }
 .section { 
     flex:1;
@@ -33,7 +33,8 @@ body{
 .middle {
     overflow: hidden;
     width : 95%}
-.left { padding-top: 20%; width : 30% ; float : left; 
+.left { 
+    padding-top: 5%; width : 45% ; float : left; 
     /*background:red;*/
 }
 .pic {
@@ -44,7 +45,6 @@ body{
     width : 50% ; 
     float : right ; 
     border-radius: 4%;
-
     padding:2%
 }
 .right p {
@@ -83,6 +83,7 @@ p a {
 
 .navbar_name{ 
     font-size: 24px;
+
 }
 
 .navbar_menu{
@@ -120,7 +121,9 @@ p a {
 
 @media screen and (max-width:768px ) {
 
-
+    .middle{
+        margin:0%;
+    }
     .left, .right { 
         padding-top : 5%;
         width :100% ;
@@ -128,7 +131,8 @@ p a {
     }
     .left{padding-top : 0%}
     .pic {
-        width : 100%;
+
+        width:100%;
         margin-bottom: 5%;
         display:block;
         margin :0 auto;
@@ -150,7 +154,13 @@ p a {
         display:none;
         flex-direction: column;
         align-items: center;
-        width:100%
+        width:100%;
+    }
+    .navbar_name{
+        white-space: nowrap;
+        overflow: hidden; 
+        text-overflow: ellipsis; 
+
     }
     .navbar_menu li {
         width: 100%;
@@ -167,6 +177,6 @@ p a {
 
 
     p{
-        font-size : 0.8vw;
+        font-size : 0.5vw;
     }
 }

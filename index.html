@@ -67,12 +67,69 @@
 
     });
   </script>
-  
+
+<style>
+  /*debug 
+  div.item:nth-child(1) {background: black;}
+  div.item:nth-child(2) {background: red;}
+  div.item:nth-child(3) {background: green;}*/
+
+  .section{position: relative; height:100%;}
+  .gallery {
+    position: absolute;
+    margin : 0 auto ; 
+  }
+  video{
+    border-radius: 10px;
+    margin-top: 5%;
+    width:500px;
+    height:500px;
+  }
+  button{
+    padding:10px;
+  }
+  #page_interest .right {
+    position: relative; 
+    height:600px ; }
+  .controls{
+    position:absolute;
+    left: 250px;
+    margin-left: -30px;
+  }
+  #page_other{
+    height:600px;
+  }
+
+
+</style>
+<script>
+  $(document).ready( function (){
+    var width =$('[data-role="slider"]').attr('data-width');
+    var height =$('[data-role="slider"]').attr('data-height');
+    var count = $('[data-role="slider"] div.item').length;
+    $('[data-role="slider"]').css({position:'relative' , overflow:'hidden', width:width, height:height})
+    .find('.wrapper').css({position:'absolute',width : count *width})
+    .find('.item').css({width:width,height:height,float:'left'});
+    var currentPage =0; 
+    var changePage = ()=> {$('.wrapper').animate({left :-currentPage*width},800) };
+    $('#left-button').click( ()=> {
+      if (currentPage >0 ){ currentPage--; changePage();}
+    } ); 
+    $('#right-button').click( ()=> {
+      if (currentPage <count-1 ){ currentPage++; changePage();}
+    } );  });
+
+</script>
+
+
+
   <style>
     
     * { margin:0; padding: 0;}
     body {
-      width: 960px; margin: 0 auto; overflow-x: hidden; position: relative;}
+      width: 960px; margin: 0 auto; overflow-x: hidden; position: relative;
+    height : 100% ; } 
+    
     .header { width: 260px; float: left;}
     #section { width: 700px; float: right; }
     @media screen and (max-width: 767px) {
@@ -84,7 +141,7 @@
       font-family: 'League Spartan', sans-serif;
       font-weight: 900;
       font-size: 2.5em;
-      
+
     }
     p{
     font-family: 'Montserrat', sans-serif;
@@ -94,10 +151,12 @@
 
 </style>
 
-
 </head>
 <body>
 
+
+
+    <!-- 내비게이션-->
     <nav class="navbar">
       <div class="navbar_name">
         <p> Dongju, Son </p>
@@ -113,49 +172,96 @@
       </a>
     </nav>
     <div class="sep_bar"></div>
+    <div class=""></div>
     <div class="container" >
 
       <!-- 페이지 Home -->
+      
       <div class="section" id="page_home">      
         <div class ="middle"> 
            <div class="left">
-            <img src="http://placehold.it/350x300" class ="pic">
+            <img src="./photos/me.jpg" class ="pic">
            </div>
            <div class="right">
               <h2>Dongju Son </h2>
-              <hr>
+              <br><hr><br>
+
               <p> 
                 I'm majoring Computer Science At the <a href="https://cse.kangwon.ac.kr/cse/index.do">Kangwon National University</a>.
                 I've recently become interested in classes such as Data Structures, Web, and Linux Programming.  
                 I'm in college to figure out what I want to accomplish with my life.
               </p>
-              <h2> Ability</h2>
-              <hr>
-              <p> 
-                I am currently in my second year At the Kangwon National University.
-                I am a student in the Department of Computer Science. 
-                I am impressed by the progress of technology, which is what drew me to choose this major. 
-                I'm now interested in data structure and web development classes.
-              </p>
-              </div>
 
+              <h2>Contact</h2>
+              <br><hr><br>
+                <p> <i class="fa-solid fa-envelope"></i> <a href="mailto:djson@kangwon.ac.kr"> djson@kangwon.ac.kr </a> <br>
+                  <i class="fa-brands fa-square-github"></i>
+                  <a href="https://github.com/djson98"> git </a></p>
+
+              </div>
+              <div class="bottom"> 
+              </div>
         </div>
-        <div class="bottom">  
-        
-        </div>
+
       </div>
       <!-- 페이지 interest -->
       <div class="section" id="page_interest" >
-        <h2>Interest </h2>
-        <hr>
-        <p>I love skateboarding.</p>
-      </div>
+
+        <!-- 갤러리-->
+        <div class ="middle">
+          <div class="left">
+            <h2>Interest </h2>
+            <br>
+        <hr><br>
+            <p>I love skateboarding.
+              I'm afraid of falling and getting hurt when I try new tricks,
+              But it teaches me how to overcome the fear.
+              The biggest value I've learned is a resilience.
+              I've learned how to try again with smiling, even if i fall, through skateboarding.
+
+            </p>
+          </div> 
+          <div class="right">
+            <div data-role="slider" data-width="500" data-height="500" >
+              
+              <div class="wrapper">
+                <div class="item">
+                  <video src="./photos/video1.mp4" controls autoplay></video>
+                </div>
+                <div class="item">
+                  <video src="./photos/video2.mp4" controls autoplay></video>
+                </div>
+                <div class="item">
+                  <video src="./photos/video3.mp4" controls autoplay></video>
+                </div>
+              </div>
+              
+            </div>
+            <div class="controls"> 
+              <br>
+              <button id="left-button">◁</button>
+              <button id="right-button">▷</button>
+
+            </div>
+
+
+          </div>
+        </div>
+
+
+
+
+
+
+        </div>
+
       <!-- 페이지 other -->
       <div class="section" id="page_other" >
-        <h2>Activity</h2>
-        <hr>
-        <p>Departmant of Computer Science ,Kangwon National University </p>
-        <p><strong>GPA </strong>: 4.5/ 4.5 <a href="#"></a></p> <br>
+        <h2>Activity</h2><br>
+        <hr><br>
+        <p>Second Year, Departmant of Computer Science ,Kangwon National University </p>
+        <br>
+        <p><strong>GPA </strong>: 4.5/ 4.5 (100/100)<a href="#"></a></p> <br>
         <p><strong>Scholarship</strong> 7,602,000 KRW <br> 
         <p> Merit-Based Scholarship 2022 (Spring, Fall), 2023 (Spring)</p> <br>
         <p><strong>Awards</strong><br> Good Lecture Essay Contest, 2022 summer<br></p> 
