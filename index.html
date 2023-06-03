@@ -85,14 +85,20 @@
     var height = $('[data-role="slider"]').attr('data-height');
     var count = $('[data-role="slider"] div.item').length;
     /* 반응형 갤러리 */
+
     var screenWidth = $(window).width(); 
     var check = function () {
     if (screenWidth < 500){
-    var wid = screenWidth - 100 + 'px';
-    $('video').css({'width':wid  ,height:wid});
-    var height = screenWidth; 
-    var width = screenWidth;
+      var wid = screenWidth - 100 + 'px';
+      $('video').css({'width':wid  ,height:wid});
+    } else {
+      var width = $('[data-role="slider"]').attr('data-width');
+      var height = $('[data-role="slider"]').attr('data-height');
+      $('video').css({'width':width  ,height:height});
     } };
+
+
+
     $(window).resize(function (){
       console.log ( $(window).width());
       screenWidth = $(window).width();
@@ -139,6 +145,11 @@
     font-family: 'Montserrat', sans-serif;
     font-size:  24px;
     line-height: 1.5;
+    }
+    .controls{
+      position: absolute;
+      top: 0;
+      z-index :100px 
     }
  
 </style>
