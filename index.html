@@ -2,13 +2,13 @@
 <html>
 <head>
   <title>Dongju, Son </title>
+  <script src="custom.js"></script>
   <meta name="viewport" content="user-scalable=no,initial-scale=1,maximum-scale=1">
   <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <!-- for hamburger icon-->
   <script src="https://kit.fontawesome.com/1d7a1a994b.js" crossorigin="anonymous"></script>
-  <script src="custom.js"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
+    <!-- font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Noto+Sans+KR&family=Open+Sans:ital@1&display=swap" rel="stylesheet">
@@ -24,46 +24,22 @@
       $('.navbar_menu').animate().toggleClass('active');
     });
 
+    /*SPA  page routing */
+    $('.navbar_menu li').click( function () {
+      var moveToPage = '#page_'+$(this).attr('id');
+      var otherPage = $(moveToPage).siblings();
+      $(moveToPage).css('display','block' );
+      $(moveToPage).siblings().css('display','none' );
+      $('.navbar_menu').removeClass('active');
+      $(this).css('fontWeight','bold') ;
+      $(this).siblings().css('fontWeight','normal') 
+    });
 
-    /*SPA */
-    $('.menu_interest').click (function(){
-      $('#page_interest').css('display','block') ; 
-      $('#page_interest').siblings().css('display','none');
-      $(this).css("fontWeight", "bold"); 
-      $(this).siblings().css("fontWeight", "normal");
-    });
-/*
-    $('.menu_interest').click (function(){
-      $('#page_interest').show().siblings().hide();
-      $(this).css("fontWeight", "bold"); 
-      $(this).siblings().css("fontWeight", "normal");
-    }); */
-    $('.menu_home').click (function(){
-      $('#page_home').show().siblings().hide();
-      $(this).css("fontWeight", "bold"); 
-      $(this).siblings().css("fontWeight", "normal");
-    });
-    $('.menu_other').click (function(){
-      $('#page_other').show().siblings().hide();
-      $(this).css("fontWeight", "bold"); 
-      $(this).siblings().css("fontWeight", "normal");
-    });
     /* 메뉴 hover */
     $('.menu')
     .mouseenter(function(){ $(this).css({background:'rgb(178, 202, 255)'});})
-    .mouseleave(function(){ $(this).css({background:'white',opacity:1});})
-    ;
+    .mouseleave(function(){ $(this).css({background:'white',opacity:1});});
 
-    /* test*/
-
-    /*
-    pages.each ( function (index,item) 
-    {
-      alert( item.innerHTML ) ;
-      $(item);
-    }
-    ) ; 
-*/  
 
     });
   </script>
@@ -93,8 +69,8 @@
     height:600px ; }
   .controls{
     position:absolute;
-    left: 250px;
-    margin-left: -30px;
+    left: 0;
+    margin-left: 30px;
   }
   #page_other{
     height:600px;
@@ -103,10 +79,27 @@
 
 </style>
 <script>
+  /*갤러리 */
   $(document).ready( function (){
-    var width =$('[data-role="slider"]').attr('data-width');
-    var height =$('[data-role="slider"]').attr('data-height');
+    var width = $('[data-role="slider"]').attr('data-width');
+    var height = $('[data-role="slider"]').attr('data-height');
     var count = $('[data-role="slider"] div.item').length;
+    /* 반응형 갤러리 */
+    var screenWidth = $(window).width(); 
+    var check = function () {
+    if (screenWidth < 500){
+    var wid = screenWidth - 100 + 'px';
+    $('video').css({'width':wid  ,height:wid});
+    var height = screenWidth; 
+    var width = screenWidth
+    } };
+    $(window).resize(function (){
+      console.log ( $(window).width());
+      screenWidth = $(window).width();
+      check();
+    });
+    check();
+    /**/
     $('[data-role="slider"]').css({position:'relative' , overflow:'hidden', width:width, height:height})
     .find('.wrapper').css({position:'absolute',width : count *width})
     .find('.item').css({width:width,height:height,float:'left'});
@@ -116,9 +109,8 @@
       if (currentPage >0 ){ currentPage--; changePage();}
     } ); 
     $('#right-button').click( ()=> {
-      if (currentPage <count-1 ){ currentPage++; changePage();}
+      if (currentPage <count-1 ){ currentPage++; changePage();   }
     } );  });
-
 </script>
 
 
@@ -129,10 +121,10 @@
     body {
       width: 960px; margin: 0 auto; overflow-x: hidden; position: relative;
     height : 100% ; } 
-    
     .header { width: 260px; float: left;}
     #section { width: 700px; float: right; }
     @media screen and (max-width: 767px) {
+      video {width : 100% ; }
       body { width: auto }
       .header { width: auto; float: none; }
       .section { width: auto; float: none; }
@@ -147,8 +139,8 @@
     font-family: 'Montserrat', sans-serif;
     font-size:  24px;
     line-height: 1.5;
-  }
-
+    }
+ 
 </style>
 
 </head>
@@ -162,9 +154,9 @@
         <p> Dongju, Son </p>
       </div>
       <ul class="navbar_menu">
-        <li  class="menu_home menu"  ><a href="#" id="home"> Home </a></li>
-        <li class="menu_interest menu" ><a href="#" id="interest"> Interest </a></li>
-        <li class="menu_other menu" ><a href="#"id="other"  > Other </a></li>
+        <li  class="menu_home menu" id="home"><a href="#" > Home </a></li>
+        <li class="menu_interest menu" id="interest"><a href="#" > Interest </a></li>
+        <li class="menu_other menu" id="other" ><a href="#" > Other </a></li>
       </ul>
       <div class="navbar_test"></div>
       <a href="#" class="navbar_toggle">
@@ -214,19 +206,19 @@
             <br>
         <hr><br>
             <p>I love skateboarding.
-              I'm afraid of falling and getting hurt when I try new tricks,
+              Because I'm afraid of falling and getting hurt when I try new tricks,
               But it teaches me how to overcome the fear.
               The biggest value I've learned is a resilience.
-              I've learned how to try again with smiling, even if i fall, through skateboarding.
+              I've learned how to get back up and try again with smiling, even if i fall, through skateboarding.
 
             </p>
           </div> 
           <div class="right">
-            <div data-role="slider" data-width="500" data-height="500" >
+            <div data-role="slider" data-width="500" data-height="500" class="slider" >
               
               <div class="wrapper">
                 <div class="item">
-                  <video src="./photos/video1.mp4" controls autoplay></video>
+                  <video src="./photos/video1.mp4" controls autoplay ></video>
                 </div>
                 <div class="item">
                   <video src="./photos/video2.mp4" controls autoplay></video>
@@ -262,8 +254,9 @@
         <p>Second Year, Departmant of Computer Science ,Kangwon National University </p>
         <br>
         <p><strong>GPA </strong>: 4.5/ 4.5 (100/100)<a href="#"></a></p> <br>
-        <p><strong>Scholarship</strong> 7,602,000 KRW <br> 
-        <p> Merit-Based Scholarship 2022 (Spring, Fall), 2023 (Spring)</p> <br>
+        <p><strong>Scholarship</strong> Total 7,602,000 KRW <br> 
+        <p> Merit-Based Scholarship 2022 (Spring, Fall), 2023 (Spring)</p> 
+        <p> Scholraship from RLU Kangwon 2023 </p> <br>
         <p><strong>Awards</strong><br> Good Lecture Essay Contest, 2022 summer<br></p> 
         
         
