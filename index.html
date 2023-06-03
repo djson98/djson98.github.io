@@ -2,20 +2,27 @@
 <html>
 <head>
   <title>Dongju, Son </title>
-  <script src="custom.js"></script>
+
+
+
   <meta name="viewport" content="user-scalable=no,initial-scale=1,maximum-scale=1">
   <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
     <!-- for hamburger icon-->
+    <!-- J쿼리 외 JS 사용 금지-->
+    <!--    
+    TEMP -- 메뉴 아이콘 예시 
   <script src="https://kit.fontawesome.com/1d7a1a994b.js" crossorigin="anonymous"></script>
-
+    햄버거 메뉴  <i class="fas fa-solid fa-bars"></i> 
+    메일 아이콘 <i class="fa-solid fa-envelope"></i>
+    git                   <i class="fa-brands fa-square-github"></i>
+-->
     <!-- font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Noto+Sans+KR&family=Open+Sans:ital@1&display=swap" rel="stylesheet">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <script src="custom.js"></script>
   <script>
     $(document).ready(function() { 
 
@@ -97,8 +104,6 @@
       $('video').css({'width':width  ,height:height});
     } };
 
-
-
     $(window).resize(function (){
       console.log ( $(window).width());
       screenWidth = $(window).width();
@@ -151,6 +156,13 @@
       top: 0;
       z-index :100px 
     }
+    button{
+      background:rgb(194, 194, 193);
+      border: none;
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      color :rgba(255, 255, 255, 0.808);
+    }
+    footer p { font-size: 17pt;}
  
 </style>
 
@@ -171,7 +183,10 @@
       </ul>
       <div class="navbar_test"></div>
       <a href="#" class="navbar_toggle">
-        <i class="fas fa-solid fa-bars"></i>
+        <img  src="./photos/hamburger.png" width="65" height="60">
+
+
+
       </a>
     </nav>
     <div class="sep_bar"></div>
@@ -197,9 +212,9 @@
 
               <h2>Contact</h2>
               <br><hr><br>
-                <p> <i class="fa-solid fa-envelope"></i> <a href="mailto:djson@kangwon.ac.kr"> djson@kangwon.ac.kr </a> <br>
-                  <i class="fa-brands fa-square-github"></i>
-                  <a href="https://github.com/djson98"> git </a></p>
+                <p> <a href="mailto:djson@kangwon.ac.kr"> djson@kangwon.ac.kr</a> |
+
+                  <a href="https://github.com/djson98"> git</a> </p>
 
               </div>
               <div class="bottom"> 
@@ -242,8 +257,8 @@
             </div>
             <div class="controls"> 
               <br>
-              <button id="left-button">◁</button>
-              <button id="right-button">▷</button>
+              <button id="left-button">◀</button>
+              <button id="right-button">▶</button>
 
             </div>
 
@@ -278,8 +293,8 @@
       <!-- footer-->
     <footer class="footer text-center"> 
       <hr>
-      <p> Copyright @ <strong>Dongju Son</strong> All Rights Reserved.</p>
-      <p><i class="fa-solid fa-envelope"></i>  <a href="mailto:djson@kangwon.ac.kr"> djson@kangwon.ac.kr</a> </p>
+      <p> ⓒ Copyright <strong>Dongju Son</strong> All Rights Reserved.</p>
+      <p>  <a href="mailto:djson@kangwon.ac.kr"> djson@kangwon.ac.kr</a> </p>
     </footer>
 
   </body>

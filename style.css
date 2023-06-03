@@ -84,7 +84,9 @@ p a {
 .navbar_name{ 
     font-size: 24px;
 
+
 }
+
 
 .navbar_menu{
     display:flex;
@@ -166,7 +168,8 @@ p a {
         text-align: center; 
     }
     .navbar_toggle{
-        display:block
+        display:block;
+        
     }
 
     .navbar_menu.active  {
@@ -176,7 +179,7 @@ p a {
 
 
     p{
-        /*font-size : 0.5vw;*/
-        font-size:17pt;
+        font-size : 17pt;
+        padding:3px;
     }
 }
