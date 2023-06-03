@@ -117,7 +117,8 @@ p a {
 .navbar_toggle{
     display : none;
     position: absolute;
-    right: 32px;
+    right: 0px;
+    top:0px;
     font-size:24px;
 }
 #page_interest, #page_other { 
