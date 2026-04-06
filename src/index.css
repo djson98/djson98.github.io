@@ -1,3 +1,54 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 22% 98%;
+    /* 본문: 순흑 대신 살짝 푸른 톤 */
+    --foreground: 222 35% 14%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 35% 14%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 221 39% 11%;
+
+    /* blue-600 */
+    --primary: 221 83% 53%;
+    --primary-foreground: 0 0% 100%;
+
+    /* blue-50 */
+    --secondary: 214 100% 97%;
+    --secondary-foreground: 221 39% 11%;
+
+    --muted: 214 28% 92%;
+    /* 부가 설명·날짜: 대비 살짝 올림 */
+    --muted-foreground: 215 14% 42%;
+
+    /* blue-100 */
+    --accent: 214 95% 93%;
+    --accent-foreground: 221 83% 36%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 32% 89%;
+    --input: 214 32% 89%;
+    --ring: 221 83% 53%;
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    @apply font-sans text-[15px] antialiased sm:text-base;
+    text-rendering: optimizeLegibility;
+  }
+}
+
