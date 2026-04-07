@@ -169,7 +169,7 @@ export default function Home() {
                     )
                     return (
                       <div key={exp.org} className={cvGrid3}>
-                        <div className={cvColDate}>{exp.period}</div>
+                        <div className={cn(cvColDate, exp.logo && 'pt-3')}>{exp.period}</div>
                         <div className="min-w-0">
                           {exp.logo ? (
                             <div className={expDetailGrid}>
