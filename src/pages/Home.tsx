@@ -30,8 +30,8 @@ const experience: ExperienceItem[] = [
     location: 'Chuncheon, South Korea',
     logo: haiLogo,
     items: [
-      { text: 'AI Civil Complaint Classification — Built and deployed an NLP/ML system to classify civil complaints for the university cloud portal and mobile app (50,000+ requests). Excellence Award, Regional Intelligence Center.', projectId: 'ai-civil-complaint' },
-      { text: 'Developed and maintained the lab website.', projectId: 'hai-lab-website' },
+      { text: 'AI Civil Complaint Classification', projectId: 'ai-civil-complaint' },
+      { text: 'Lab Website', projectId: 'hai-lab-website' },
     ],
     tags: ['NLP', 'ML', 'Web', 'HCI'],
   },
@@ -41,7 +41,7 @@ const experience: ExperienceItem[] = [
     period: 'Jan 2026 – Feb 2026',
     logo: nshcLogo,
     items: [
-      { text: 'AI Phishing Training Automation — Automated creation and delivery of phishing-awareness training content using AI-driven pipelines.', projectId: 'ai-phishing-training' },
+      { text: 'AI Phishing Training Automation', projectId: 'ai-phishing-training' },
     ],
     tags: ['AI', 'Security', 'Automation'],
   },
@@ -52,7 +52,7 @@ const experience: ExperienceItem[] = [
     location: 'Chuncheon, South Korea',
     logo: kcmedLogo,
     items: [
-      { text: 'Developed ML models and data visualization pipelines for clinical research.', projectId: 'clinical-ml' },
+      { text: 'Clinical ML & Visualization', projectId: 'clinical-ml' },
     ],
     tags: ['ML', 'Visualization', 'Clinical'],
   },
