@@ -39,6 +39,12 @@ export default function Navbar() {
               {label}
             </NavLink>
           ))}
+          <a
+            href="mailto:dongjuson@hai.kangwon.ac.kr"
+            className="rounded-md px-3 py-1.5 text-[13px] font-medium transition-colors sm:text-sm text-muted-foreground hover:bg-secondary/60 hover:text-foreground"
+          >
+            Contact
+          </a>
         </div>
       </nav>
     </header>
