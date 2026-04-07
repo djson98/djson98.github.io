@@ -33,7 +33,7 @@ const experience: ExperienceItem[] = [
       { text: 'AI Civil Complaint Classification', projectId: 'ai-civil-complaint' },
       { text: 'Lab Website', projectId: 'hai-lab-website' },
     ],
-    tags: ['NLP', 'ML', 'Web', 'HCI'],
+    tags: ['NLP', 'ML', 'LLM', 'Web', 'HCI'],
   },
   {
     org: 'NSHC Singapore, Safe Square',
@@ -44,7 +44,7 @@ const experience: ExperienceItem[] = [
     items: [
       { text: 'AI Phishing Training Automation', projectId: 'ai-phishing-training' },
     ],
-    tags: ['AI', 'Security', 'Automation'],
+    tags: ['LLM', 'Security', 'Automation'],
   },
   {
     org: 'The Korea Clinical Medicine Center (KCMED)',
@@ -74,7 +74,7 @@ const awards = [
   {
     title: 'Excellence Award, Regional Intelligence Center Creative & Autonomous Project',
     year: '2024',
-    tags: ['AI'],
+    tags: ['NLP'],
     link: 'https://www.veritas-a.com/news/articleView.html?idxno=531813',
     linkLabel: 'press',
   },
