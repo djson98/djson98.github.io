@@ -18,7 +18,7 @@ function Thumbnail({ project }: { project: (typeof projects)[number] }) {
   }
   return (
     <div className="flex h-full w-full items-center justify-center bg-muted">
-      <span className="font-display text-6xl font-bold text-muted-foreground/30 select-none sm:text-7xl">
+      <span className="font-sans text-6xl font-bold text-muted-foreground/30 select-none sm:text-7xl">
         {project.title.charAt(0)}
       </span>
     </div>
@@ -48,7 +48,7 @@ export default function Projects() {
       />
       <div className="mx-auto max-w-7xl space-y-8 px-4 py-9 sm:space-y-10 sm:px-6 sm:py-14 lg:py-16">
       <div className="space-y-1">
-        <h1 className="font-display text-[1.85rem] font-medium tracking-tight text-foreground sm:text-[2.125rem]">
+        <h1 className="font-sans text-[1.85rem] font-medium tracking-tight text-foreground sm:text-[2.125rem]">
           Projects
         </h1>
         <p className="text-sm text-muted-foreground sm:text-[15px]">

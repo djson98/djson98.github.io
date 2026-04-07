@@ -7,7 +7,7 @@ export default {
       fontFamily: {
         /** 본문·표·카드 (학술 포트폴리오 본문) */
         sans: ['Inter', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
-        /** 제목·이름 — seooyxx / al-folio 류의 세리프 톤 */
+        /** (예비) 세리프 — 현재 UI는 Inter만 사용 */
         display: ['"Source Serif 4"', 'Georgia', 'Cambria', 'Times New Roman', 'serif'],
       },
       colors: {

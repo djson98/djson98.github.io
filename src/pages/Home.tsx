@@ -220,7 +220,7 @@ function ProfilePhoto() {
           className="flex aspect-square w-full items-center justify-center bg-gradient-to-br from-primary/15 via-secondary to-muted/80 select-none"
           aria-hidden="true"
         >
-          <span className="font-display text-4xl font-medium tracking-tight text-primary/25 sm:text-5xl">DS</span>
+          <span className="font-sans text-4xl font-medium tracking-tight text-primary/25 sm:text-5xl">DS</span>
         </div>
       )}
     </div>
@@ -253,7 +253,7 @@ export default function Home() {
 
             {/* Experience */}
             <section className="space-y-3 sm:space-y-5">
-              <h2 className="font-display text-[1.7rem] font-medium tracking-tight text-foreground sm:text-[2rem]">
+              <h2 className="font-sans text-[1.7rem] font-medium tracking-tight text-foreground sm:text-[2rem]">
                 Experience
               </h2>
               <Separator className="opacity-60" />
@@ -339,7 +339,7 @@ export default function Home() {
 
             {/* Awards */}
             <section className="space-y-3 sm:space-y-5">
-              <h2 className="font-display text-[1.7rem] font-medium tracking-tight text-foreground sm:text-[2rem]">
+              <h2 className="font-sans text-[1.7rem] font-medium tracking-tight text-foreground sm:text-[2rem]">
                 Honors & Awards
               </h2>
               <Separator className="opacity-60" />
@@ -393,7 +393,7 @@ export default function Home() {
 
             {/* Additional */}
             <section className="space-y-3 sm:space-y-5">
-              <h2 className="font-display text-[1.7rem] font-medium tracking-tight text-foreground sm:text-[2rem]">
+              <h2 className="font-sans text-[1.7rem] font-medium tracking-tight text-foreground sm:text-[2rem]">
                 Additional
               </h2>
               <Separator className="opacity-60" />
@@ -447,7 +447,7 @@ export default function Home() {
           <aside className="order-1 space-y-3 sm:space-y-5 lg:order-2 lg:sticky lg:top-20 lg:w-72 lg:shrink-0 lg:self-start">
             <ProfilePhoto />
             <div className="space-y-2">
-              <h2 className="font-display text-xl font-medium tracking-tight text-foreground">
+              <h2 className="font-sans text-xl font-medium tracking-tight text-foreground">
                 Dongju Son
               </h2>
               <div className="space-y-3 text-sm leading-[1.75] text-foreground/70 sm:space-y-4 sm:leading-[1.8]">

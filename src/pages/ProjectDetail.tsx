@@ -78,7 +78,7 @@ export default function ProjectDetail() {
               />
             ) : (
               <div className="flex h-56 w-full items-center justify-center bg-muted sm:h-64">
-                <span className="font-display text-7xl font-bold text-muted-foreground/30 select-none">
+                <span className="font-sans text-7xl font-bold text-muted-foreground/30 select-none">
                   {project.title.charAt(0)}
                 </span>
               </div>
@@ -88,7 +88,7 @@ export default function ProjectDetail() {
           {/* Header */}
           <header className="mt-8 space-y-4">
             <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
-              <h1 className="font-display text-2xl font-medium tracking-tight text-foreground sm:text-[1.75rem]">
+              <h1 className="font-sans text-2xl font-medium tracking-tight text-foreground sm:text-[1.75rem]">
                 {project.title}
               </h1>
               <span className="shrink-0 text-[13px] tabular-nums text-muted-foreground sm:mt-1 sm:text-sm">
@@ -118,7 +118,7 @@ export default function ProjectDetail() {
                 id={`${project.id}-section-${i}`}
                 className={`space-y-2 ${scrollAnchor}`}
               >
-                <h2 className="font-display text-lg font-medium tracking-tight text-foreground sm:text-[1.125rem]">
+                <h2 className="font-sans text-lg font-medium tracking-tight text-foreground sm:text-[1.125rem]">
                   {section.title}
                 </h2>
                 <p className="text-[15px] leading-[1.75] text-foreground/90 sm:text-base sm:leading-[1.8]">

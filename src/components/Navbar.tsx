@@ -50,7 +50,7 @@ export default function Navbar() {
           to="/"
           end
           className={({ isActive }) =>
-            cn(navLinkClass({ isActive }), 'min-w-0 shrink font-display text-base tracking-tight')
+            cn(navLinkClass({ isActive }), 'min-w-0 shrink font-sans text-base tracking-tight')
           }
         >
           Dongju Son
