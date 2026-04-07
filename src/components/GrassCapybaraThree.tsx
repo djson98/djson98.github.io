@@ -44,48 +44,26 @@ export default function GrassCapybaraThree() {
     renderer.setClearColor(0xeef6fc, 1)
     renderer.outputColorSpace = THREE.SRGBColorSpace
     el.appendChild(renderer.domElement)
+    renderer.domElement.style.cursor = 'grab'
+    renderer.domElement.addEventListener('pointerdown', () => {
+      renderer.domElement.style.cursor = 'grabbing'
+    })
+    renderer.domElement.addEventListener('pointerup', () => {
+      renderer.domElement.style.cursor = 'grab'
+    })
+    renderer.domElement.addEventListener('pointerleave', () => {
+      renderer.domElement.style.cursor = 'grab'
+    })
 
-    // OrbitControls - 회전/줌만, 패닝 비활성화
     const controls = new OrbitControls(camera, renderer.domElement)
     controls.target.set(0, 0.12, 0)
     controls.enableDamping = true
     controls.dampingFactor = 0.06
-    controls.enablePan = false
     controls.minDistance = 0.45
     controls.maxDistance = 2.8
     controls.minPolarAngle = 0.35
     controls.maxPolarAngle = Math.PI * 0.48
     controls.update()
-
-    /** 레이캐스터 */
-    const raycaster = new THREE.Raycaster()
-    const mouse = new THREE.Vector2()
-
-    renderer.domElement.addEventListener('pointermove', (e) => {
-      const rect = renderer.domElement.getBoundingClientRect()
-      mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1
-      mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1
-      raycaster.setFromCamera(mouse, camera)
-      const hits = raycaster.intersectObject(group, true)
-      renderer.domElement.style.cursor = hits.length > 0 ? 'pointer' : 'grab'
-    })
-    renderer.domElement.addEventListener('pointerdown', (e) => {
-      const rect = renderer.domElement.getBoundingClientRect()
-      mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1
-      mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1
-      raycaster.setFromCamera(mouse, camera)
-      const hits = raycaster.intersectObject(group, true)
-      if (hits.length > 0) {
-        jumpVelocity = JUMP_FORCE
-        isJumping = true
-      } else {
-        renderer.domElement.style.cursor = 'grabbing'
-      }
-    })
-    renderer.domElement.addEventListener('pointerup', () => {
-      renderer.domElement.style.cursor = 'grab'
-    })
-    renderer.domElement.style.cursor = 'grab'
 
     scene.add(new THREE.AmbientLight(0xffffff, 0.72))
     const key = new THREE.DirectionalLight(0xffffff, 0.85)
@@ -95,7 +73,7 @@ export default function GrassCapybaraThree() {
     rim.position.set(-2, 1, -3)
     scene.add(rim)
 
-    const groundGeo = new THREE.PlaneGeometry(12, 6)
+    const groundGeo = new THREE.PlaneGeometry(5.5, 3.2)
     const groundMat = new THREE.MeshStandardMaterial({
       color: 0x4f9f6a,
       roughness: 0.95,
@@ -109,28 +87,21 @@ export default function GrassCapybaraThree() {
     const group = new THREE.Group()
     scene.add(group)
 
+    /** +X 쪽을 볼 때 기준 Y (반대로 갈 때는 여기에 π 더함) */
     const facePlusX = Math.PI / 2
 
     let mixer: THREE.AnimationMixer | null = null
     let capyModel: THREE.Object3D | null = null
+    /** Capybara.glb는 obj2gltf 정적 메시라 클립이 없음 → 보빙으로 걷는 느낌 */
     let proceduralWalk = false
     let walkPhase = 0
 
-    /** 점프 상태 */
-    let jumpVelocity = 0
-    let jumpY = 0
-    let isJumping = false
-    const JUMP_FORCE = 0.7
-    const GRAVITY = 2.4
-
-    // 중앙에서 시작, 넓게 왔다갔다
+    /** 화면 가로로 지나가 보이도록 넓게 (Orbit target을 고정해야 좌표 이동이 보임) */
     const walkBounds = { min: -1.05, max: 1.05 }
     const walkSpeed = 0.09
+    /** 1: 왼쪽→오른쪽(+X), -1: 오른쪽→왼쪽 */
     let walkDir = 1
-    group.position.x = 0  // 중앙 시작
-
-    // 이전 프레임 카피바라 X (카메라 delta 계산용)
-    let prevCapyX = 0
+    group.position.x = walkBounds.min
 
     const loader = new GLTFLoader()
     loader.load(
@@ -190,7 +161,6 @@ export default function GrassCapybaraThree() {
       const delta = Math.min((now - lastFrame) / 1000, 0.1)
       lastFrame = now
 
-      // 카피바라 이동
       let nextX = group.position.x + walkSpeed * delta * walkDir
       if (walkDir > 0 && nextX >= walkBounds.max) {
         nextX = walkBounds.max
@@ -201,35 +171,20 @@ export default function GrassCapybaraThree() {
       }
       group.position.x = nextX
 
-      // 카피바라가 이동한 dx만큼 카메라+타깃도 같이 밀기 (PUBG 방식)
-      const dx = group.position.x - prevCapyX
-      prevCapyX = group.position.x
-      camera.position.x += dx
-      controls.target.x += dx
-
-      // 점프 물리
-      if (isJumping) {
-        jumpVelocity -= GRAVITY * delta
-        jumpY += jumpVelocity * delta
-        if (jumpY <= 0) {
-          jumpY = 0
-          jumpVelocity = 0
-          isJumping = false
-        }
-      }
-
       if (proceduralWalk) {
         walkPhase += delta * Math.PI * 2 * 0.85
         const s = Math.sin(walkPhase)
-        group.position.y = jumpY + s * 0.016
-        group.rotation.z = isJumping ? 0 : s * 0.045
+        group.position.y = s * 0.016
+        group.rotation.z = s * 0.045
       } else {
-        group.position.y = jumpY
+        group.position.y = 0
         group.rotation.z = 0
       }
 
       group.rotation.y = facePlusX + (walkDir < 0 ? Math.PI : 0)
 
+      // 타깃 Y에 보빙을 더하면 카메라가 같이 흔들려 땅이 움직이는 것처럼 보임 → 높이 고정
+      controls.target.set(0, 0.12, 0)
       if (mixer) mixer.update(delta)
       controls.update()
       renderer.render(scene, camera)
