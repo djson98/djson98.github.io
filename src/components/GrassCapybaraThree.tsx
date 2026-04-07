@@ -23,7 +23,61 @@ function disposeObject3D(root: THREE.Object3D) {
   })
 }
 
-/** 히어로: 풀 바닥 + Capybara.glb */
+/** 풀잎 하나: 밑동 넓고 끝으로 갈수록 좁아지는 5-vertex 블레이드 */
+function createBladeGeometry(): THREE.BufferGeometry {
+  const bw = 0.025
+  const h = 0.18
+  const positions = new Float32Array([
+    -bw,      0,    0,  // 0 base-left
+     bw,      0,    0,  // 1 base-right
+    -bw * 0.5, h * 0.5, 0,  // 2 mid-left
+     bw * 0.5, h * 0.5, 0,  // 3 mid-right
+     0,        h,    0,  // 4 tip
+  ])
+  const uvs = new Float32Array([
+    0,   0,
+    1,   0,
+    0,   0.5,
+    1,   0.5,
+    0.5, 1,
+  ])
+  const indices = new Uint16Array([0, 1, 3, 0, 3, 2, 2, 3, 4])
+  const geo = new THREE.BufferGeometry()
+  geo.setAttribute('position', new THREE.BufferAttribute(positions, 3))
+  geo.setAttribute('uv', new THREE.BufferAttribute(uvs, 2))
+  geo.setIndex(new THREE.BufferAttribute(indices, 1))
+  return geo
+}
+
+const GRASS_VERT = /* glsl */ `
+uniform float uTime;
+varying vec2 vUv;
+
+void main() {
+  vUv = uv;
+  vec3 pos = position;
+
+  // 높이에 비례해서 바람 세게 (밑동은 고정)
+  float windPower = pos.y * pos.y * 4.0;
+  vec3 iPos = instanceMatrix[3].xyz;
+  pos.x += sin(uTime * 2.0 + iPos.x * 1.2 + iPos.z * 0.5) * 0.09 * windPower;
+  pos.z += cos(uTime * 1.5 + iPos.z * 1.0 + iPos.x * 0.3) * 0.05 * windPower;
+
+  gl_Position = projectionMatrix * modelViewMatrix * instanceMatrix * vec4(pos, 1.0);
+}
+`
+
+const GRASS_FRAG = /* glsl */ `
+varying vec2 vUv;
+
+void main() {
+  vec3 base = vec3(0.13, 0.42, 0.08);
+  vec3 tip  = vec3(0.40, 0.78, 0.20);
+  gl_FragColor = vec4(mix(base, tip, vUv.y), 1.0);
+}
+`
+
+/** 히어로: 풀밭 + Capybara.glb */
 export default function GrassCapybaraThree() {
   const containerRef = useRef<HTMLDivElement>(null)
 
@@ -45,14 +99,38 @@ export default function GrassCapybaraThree() {
     renderer.outputColorSpace = THREE.SRGBColorSpace
     el.appendChild(renderer.domElement)
     renderer.domElement.style.cursor = 'grab'
-    renderer.domElement.addEventListener('pointerdown', () => {
-      renderer.domElement.style.cursor = 'grabbing'
+
+    // 레이캐스터 (점프 클릭용)
+    const raycaster = new THREE.Raycaster()
+    const mouse = new THREE.Vector2()
+    let overCapybara = false
+
+    renderer.domElement.addEventListener('pointermove', (e) => {
+      const rect = renderer.domElement.getBoundingClientRect()
+      mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1
+      mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1
+      raycaster.setFromCamera(mouse, camera)
+      overCapybara = raycaster.intersectObject(group, true).length > 0
+      renderer.domElement.style.cursor = overCapybara ? 'pointer' : 'grab'
+    })
+    renderer.domElement.addEventListener('pointerdown', (e) => {
+      const rect = renderer.domElement.getBoundingClientRect()
+      mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1
+      mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1
+      raycaster.setFromCamera(mouse, camera)
+      if (raycaster.intersectObject(group, true).length > 0) {
+        jumpVelocity = JUMP_FORCE
+        isJumping = true
+      } else {
+        renderer.domElement.style.cursor = 'grabbing'
+      }
     })
     renderer.domElement.addEventListener('pointerup', () => {
-      renderer.domElement.style.cursor = 'grab'
+      renderer.domElement.style.cursor = overCapybara ? 'pointer' : 'grab'
     })
     renderer.domElement.addEventListener('pointerleave', () => {
       renderer.domElement.style.cursor = 'grab'
+      overCapybara = false
     })
 
     const controls = new OrbitControls(camera, renderer.domElement)
@@ -73,33 +151,61 @@ export default function GrassCapybaraThree() {
     rim.position.set(-2, 1, -3)
     scene.add(rim)
 
+    // 흙 바닥 (풀잎 아래로 살짝 보임)
     const groundGeo = new THREE.PlaneGeometry(5.5, 3.2)
-    const groundMat = new THREE.MeshStandardMaterial({
-      color: 0x4f9f6a,
-      roughness: 0.95,
-      metalness: 0,
-    })
+    const groundMat = new THREE.MeshStandardMaterial({ color: 0x3a7a2e, roughness: 0.98, metalness: 0 })
     const ground = new THREE.Mesh(groundGeo, groundMat)
     ground.rotation.x = -Math.PI / 2
     ground.position.y = -0.003
     scene.add(ground)
 
+    // 풀잎 InstancedMesh
+    const BLADE_COUNT = 2500
+    const bladeGeo = createBladeGeometry()
+    const grassUniforms = { uTime: { value: 0 } }
+    const grassMat = new THREE.ShaderMaterial({
+      uniforms: grassUniforms,
+      vertexShader: GRASS_VERT,
+      fragmentShader: GRASS_FRAG,
+      side: THREE.DoubleSide,
+    })
+    const grassMesh = new THREE.InstancedMesh(bladeGeo, grassMat, BLADE_COUNT)
+    grassMesh.frustumCulled = false
+    const dummy = new THREE.Object3D()
+    for (let i = 0; i < BLADE_COUNT; i++) {
+      dummy.position.set(
+        (Math.random() - 0.5) * 5.2,
+        0,
+        (Math.random() - 0.5) * 3.0,
+      )
+      dummy.rotation.set(0, Math.random() * Math.PI * 2, 0)
+      dummy.scale.setScalar(0.7 + Math.random() * 0.7)
+      dummy.updateMatrix()
+      grassMesh.setMatrixAt(i, dummy.matrix)
+    }
+    grassMesh.instanceMatrix.needsUpdate = true
+    scene.add(grassMesh)
+
+    // 카피바라 그룹
     const group = new THREE.Group()
     scene.add(group)
 
-    /** +X 쪽을 볼 때 기준 Y (반대로 갈 때는 여기에 π 더함) */
     const facePlusX = Math.PI / 2
 
     let mixer: THREE.AnimationMixer | null = null
     let capyModel: THREE.Object3D | null = null
-    /** Capybara.glb는 obj2gltf 정적 메시라 클립이 없음 → 보빙으로 걷는 느낌 */
     let proceduralWalk = false
     let walkPhase = 0
 
-    /** 화면 가로로 지나가 보이도록 넓게 (Orbit target을 고정해야 좌표 이동이 보임) */
+    // 점프
+    let jumpVelocity = 0
+    let jumpY = 0
+    let isJumping = false
+    const JUMP_FORCE = 0.7
+    const GRAVITY = 2.4
+
     const walkBounds = { min: -1.05, max: 1.05 }
     const walkSpeed = 0.09
-    /** 1: 왼쪽→오른쪽(+X), -1: 오른쪽→왼쪽 */
     let walkDir = 1
     group.position.x = walkBounds.min
 
@@ -107,17 +213,13 @@ export default function GrassCapybaraThree() {
     loader.load(
       capybaraGlbUrl,
       (gltf) => {
-        if (cancelled) {
-          disposeObject3D(gltf.scene)
-          return
-        }
+        if (cancelled) { disposeObject3D(gltf.scene); return }
 
         const model = gltf.scene
         const box = new THREE.Box3().setFromObject(model)
         const size = box.getSize(new THREE.Vector3())
         const maxDim = Math.max(size.x, size.y, size.z, 0.001)
-        const target = 0.55
-        model.scale.setScalar(target / maxDim)
+        model.scale.setScalar(0.55 / maxDim)
 
         const box2 = new THREE.Box3().setFromObject(model)
         model.position.set(
@@ -146,6 +248,7 @@ export default function GrassCapybaraThree() {
 
     let raf = 0
     let lastFrame = performance.now()
+    let elapsed = 0
 
     const resize = () => {
       const w = el.clientWidth
@@ -160,30 +263,36 @@ export default function GrassCapybaraThree() {
     const tick = (now: number) => {
       const delta = Math.min((now - lastFrame) / 1000, 0.1)
       lastFrame = now
+      elapsed += delta
 
+      // 풀 바람 시간 업데이트
+      grassUniforms.uTime.value = elapsed
+
+      // 카피바라 이동
       let nextX = group.position.x + walkSpeed * delta * walkDir
-      if (walkDir > 0 && nextX >= walkBounds.max) {
-        nextX = walkBounds.max
-        walkDir = -1
-      } else if (walkDir < 0 && nextX <= walkBounds.min) {
-        nextX = walkBounds.min
-        walkDir = 1
-      }
+      if (walkDir > 0 && nextX >= walkBounds.max) { nextX = walkBounds.max; walkDir = -1 }
+      else if (walkDir < 0 && nextX <= walkBounds.min) { nextX = walkBounds.min; walkDir = 1 }
       group.position.x = nextX
+
+      // 점프 물리
+      if (isJumping) {
+        jumpVelocity -= GRAVITY * delta
+        jumpY += jumpVelocity * delta
+        if (jumpY <= 0) { jumpY = 0; jumpVelocity = 0; isJumping = false }
+      }
 
       if (proceduralWalk) {
         walkPhase += delta * Math.PI * 2 * 0.85
         const s = Math.sin(walkPhase)
-        group.position.y = s * 0.016
-        group.rotation.z = s * 0.045
+        group.position.y = jumpY + s * 0.016
+        group.rotation.z = isJumping ? 0 : s * 0.045
       } else {
-        group.position.y = 0
+        group.position.y = jumpY
         group.rotation.z = 0
       }
 
       group.rotation.y = facePlusX + (walkDir < 0 ? Math.PI : 0)
 
-      // 타깃 Y에 보빙을 더하면 카메라가 같이 흔들려 땅이 움직이는 것처럼 보임 → 높이 고정
       controls.target.set(0, 0.12, 0)
       if (mixer) mixer.update(delta)
       controls.update()
@@ -206,6 +315,8 @@ export default function GrassCapybaraThree() {
       if (capyModel) disposeObject3D(capyModel)
       groundGeo.dispose()
       groundMat.dispose()
+      bladeGeo.dispose()
+      grassMat.dispose()
       renderer.dispose()
       el.removeChild(renderer.domElement)
     }
