@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import capybaraGlbUrl from '../../asset/Capybara.glb?url'
 
 function pickWalkClip(clips: THREE.AnimationClip[]): THREE.AnimationClip | null {
@@ -43,7 +44,18 @@ export default function GrassCapybaraThree() {
     renderer.setClearColor(0xeef6fc, 1)
     renderer.outputColorSpace = THREE.SRGBColorSpace
     el.appendChild(renderer.domElement)
-    renderer.domElement.style.cursor = 'default'
+
+    // OrbitControls - 회전/줌만, 패닝 비활성화
+    const controls = new OrbitControls(camera, renderer.domElement)
+    controls.target.set(0, 0.12, 0)
+    controls.enableDamping = true
+    controls.dampingFactor = 0.06
+    controls.enablePan = false
+    controls.minDistance = 0.45
+    controls.maxDistance = 2.8
+    controls.minPolarAngle = 0.35
+    controls.maxPolarAngle = Math.PI * 0.48
+    controls.update()
 
     /** 레이캐스터 */
     const raycaster = new THREE.Raycaster()
@@ -55,7 +67,7 @@ export default function GrassCapybaraThree() {
       mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1
       raycaster.setFromCamera(mouse, camera)
       const hits = raycaster.intersectObject(group, true)
-      renderer.domElement.style.cursor = hits.length > 0 ? 'pointer' : 'default'
+      renderer.domElement.style.cursor = hits.length > 0 ? 'pointer' : 'grab'
     })
     renderer.domElement.addEventListener('pointerdown', (e) => {
       const rect = renderer.domElement.getBoundingClientRect()
@@ -66,8 +78,14 @@ export default function GrassCapybaraThree() {
       if (hits.length > 0) {
         jumpVelocity = JUMP_FORCE
         isJumping = true
+      } else {
+        renderer.domElement.style.cursor = 'grabbing'
       }
     })
+    renderer.domElement.addEventListener('pointerup', () => {
+      renderer.domElement.style.cursor = 'grab'
+    })
+    renderer.domElement.style.cursor = 'grab'
 
     scene.add(new THREE.AmbientLight(0xffffff, 0.72))
     const key = new THREE.DirectionalLight(0xffffff, 0.85)
@@ -77,7 +95,7 @@ export default function GrassCapybaraThree() {
     rim.position.set(-2, 1, -3)
     scene.add(rim)
 
-    const groundGeo = new THREE.PlaneGeometry(5.5, 3.2)
+    const groundGeo = new THREE.PlaneGeometry(12, 6)
     const groundMat = new THREE.MeshStandardMaterial({
       color: 0x4f9f6a,
       roughness: 0.95,
@@ -91,7 +109,6 @@ export default function GrassCapybaraThree() {
     const group = new THREE.Group()
     scene.add(group)
 
-    /** +X 쪽을 볼 때 기준 Y (반대로 갈 때는 여기에 π 더함) */
     const facePlusX = Math.PI / 2
 
     let mixer: THREE.AnimationMixer | null = null
@@ -106,13 +123,14 @@ export default function GrassCapybaraThree() {
     const JUMP_FORCE = 0.7
     const GRAVITY = 2.4
 
+    // 중앙에서 시작, 넓게 왔다갔다
     const walkBounds = { min: -1.05, max: 1.05 }
     const walkSpeed = 0.09
     let walkDir = 1
-    group.position.x = walkBounds.min
+    group.position.x = 0  // 중앙 시작
 
-    /** 카메라가 따라가는 X (lerp용) */
-    let camTargetX = walkBounds.min
+    // 이전 프레임 카피바라 X (카메라 delta 계산용)
+    let prevCapyX = 0
 
     const loader = new GLTFLoader()
     loader.load(
@@ -183,6 +201,12 @@ export default function GrassCapybaraThree() {
       }
       group.position.x = nextX
 
+      // 카피바라가 이동한 dx만큼 카메라+타깃도 같이 밀기 (PUBG 방식)
+      const dx = group.position.x - prevCapyX
+      prevCapyX = group.position.x
+      camera.position.x += dx
+      controls.target.x += dx
+
       // 점프 물리
       if (isJumping) {
         jumpVelocity -= GRAVITY * delta
@@ -206,13 +230,8 @@ export default function GrassCapybaraThree() {
 
       group.rotation.y = facePlusX + (walkDir < 0 ? Math.PI : 0)
 
-      // 카메라가 카피바라 X를 부드럽게 따라감 (Y/Z 고정)
-      const followLerp = 1 - Math.pow(0.02, delta)
-      camTargetX += (group.position.x - camTargetX) * followLerp
-      camera.position.x = camTargetX
-      camera.lookAt(camTargetX, 0.12, 0)
-
       if (mixer) mixer.update(delta)
+      controls.update()
       renderer.render(scene, camera)
       raf = requestAnimationFrame(tick)
     }
@@ -228,6 +247,7 @@ export default function GrassCapybaraThree() {
       ro.disconnect()
       window.removeEventListener('resize', resize)
       mixer?.stopAllAction()
+      controls.dispose()
       if (capyModel) disposeObject3D(capyModel)
       groundGeo.dispose()
       groundMat.dispose()
