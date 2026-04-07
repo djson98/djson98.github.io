@@ -1,6 +1,6 @@
 import { lazy, Suspense } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowUpRight } from 'lucide-react'
+import { ArrowUpRight, Mail, Github, Linkedin } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { ProjectTagChips } from '@/components/ProjectTagChips'
 import { Separator } from '@/components/ui/separator'
@@ -272,6 +272,35 @@ export default function Home() {
                 <br />
                 Previously worked at the Korea Clinical Medicine Center at KNU Hospital and NSHC SafeSquare in Singapore.
               </p>
+
+              {/* 소셜 링크 */}
+              <div className="flex items-center gap-2 pt-1">
+                <a
+                  href="mailto:dongjuson@hai.kangwon.ac.kr"
+                  title="Email"
+                  className="flex h-8 w-8 items-center justify-center rounded-md text-muted-foreground/60 transition-colors hover:bg-muted hover:text-foreground"
+                >
+                  <Mail className="h-4 w-4" />
+                </a>
+                <a
+                  href="https://github.com/djson98"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="GitHub"
+                  className="flex h-8 w-8 items-center justify-center rounded-md text-muted-foreground/60 transition-colors hover:bg-muted hover:text-foreground"
+                >
+                  <Github className="h-4 w-4" />
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/dongju-son-954b57338/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="LinkedIn"
+                  className="flex h-8 w-8 items-center justify-center rounded-md text-muted-foreground/60 transition-colors hover:bg-muted hover:text-foreground"
+                >
+                  <Linkedin className="h-4 w-4" />
+                </a>
+              </div>
             </div>
           </aside>
 
