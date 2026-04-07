@@ -216,7 +216,16 @@ export default function Home() {
                 Dongjun Son
               </h2>
               <p className="text-sm leading-[1.8] text-foreground/70">
-                Senior CS student at Kangwon National University, currently working in the{' '}
+                Senior CS student at{' '}
+                <a
+                  href="https://cse.kangwon.ac.kr/cse/index.do"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-foreground/90 underline underline-offset-2 decoration-muted-foreground/30 hover:decoration-foreground hover:text-foreground transition-colors"
+                >
+                  Kangwon National University
+                </a>
+                , currently working in the{' '}
                 <a
                   href="https://hai.kangwon.ac.kr"
                   target="_blank"
