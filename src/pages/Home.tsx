@@ -79,9 +79,9 @@ const awards = [
 
 /** 날짜 | 본문 | 태그, 테두리 없음 */
 const cvGrid3 =
-  'grid grid-cols-1 sm:grid-cols-[minmax(7.5rem,auto)_1fr_minmax(0,5.5rem)] gap-x-6 sm:gap-x-8 gap-y-2 sm:gap-y-1 items-start text-[15px] sm:text-base leading-[1.65]'
+  'group grid grid-cols-1 sm:grid-cols-[minmax(7.5rem,auto)_1fr_minmax(0,5.5rem)] gap-x-6 sm:gap-x-8 gap-y-2 sm:gap-y-1 items-start text-[15px] sm:text-base leading-[1.65] rounded-lg -mx-3 px-3 py-2 transition-colors hover:bg-muted/50'
 const cvColDate =
-  'text-[11px] sm:text-xs text-muted-foreground/90 tabular-nums whitespace-nowrap sm:pt-0.5 font-medium'
+  'text-[11px] sm:text-xs text-muted-foreground/60 tabular-nums whitespace-nowrap sm:pt-0.5 font-medium transition-colors group-hover:text-muted-foreground'
 const cvHeader3 =
   'hidden sm:grid sm:grid-cols-[minmax(7.5rem,auto)_1fr_auto] gap-x-6 sm:gap-x-8 pb-2.5 text-[0.65rem] font-semibold uppercase tracking-[0.12em] text-muted-foreground/80'
 
