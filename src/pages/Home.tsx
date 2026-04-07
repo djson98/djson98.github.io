@@ -76,7 +76,7 @@ const awards = [
     year: '2024',
     tags: ['NLP'],
     link: 'https://www.veritas-a.com/news/articleView.html?idxno=531813',
-    linkLabel: 'press',
+    linkLabel: 'Veritas-α',
   },
   {
     title: 'Outstanding Essay Award, Kangwon National University',
@@ -192,7 +192,7 @@ export default function Home() {
                             href={a.link as string}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="ml-2 inline-flex items-center gap-0.5 text-[11px] font-medium text-muted-foreground/50 hover:text-foreground transition-colors"
+                            className="ml-2 inline-flex items-center gap-0.5 text-[11px] font-medium text-muted-foreground/70 underline underline-offset-2 decoration-muted-foreground/30 hover:text-foreground hover:decoration-foreground transition-colors"
                           >
                             {('linkLabel' in a ? a.linkLabel as string : undefined) ?? 'link'}
                             <ArrowUpRight className="h-3 w-3" />
