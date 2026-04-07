@@ -74,12 +74,12 @@ const awards = [
   {
     title: 'Excellence Award, Regional Intelligence Center Creative & Autonomous Project',
     year: '2024',
-    tags: ['AI', 'Research'],
+    tags: ['AI'],
   },
   {
     title: 'Outstanding Essay Award, Kangwon National University',
     year: '2023',
-    tags: ['Writing', 'Essay'],
+    tags: ['Essay'],
   },
 ]
 
