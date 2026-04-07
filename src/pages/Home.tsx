@@ -119,41 +119,30 @@ export default function Home() {
       <div className="mx-auto max-w-6xl px-6 py-14 sm:py-16">
         <div className="flex flex-col gap-14 lg:flex-row lg:gap-16">
 
-          {/* ── 왼쪽: About (sticky) ── */}
-          <aside className="lg:sticky lg:top-20 lg:w-64 lg:shrink-0 lg:self-start">
-            <div className="space-y-6">
-              {/* 사진 */}
-              <div className="aspect-square w-40 overflow-hidden rounded-2xl bg-muted/60 ring-1 ring-border/40 lg:w-full">
-                {/* 사진 파일을 asset/ 에 넣고 아래 주석 해제하세요 */}
-                {/* <img src={profilePhoto} alt="Dongjun Son" className="h-full w-full object-cover" /> */}
-                <div className="flex h-full w-full items-center justify-center text-6xl text-muted-foreground/20 select-none">
-                  📷
-                </div>
-              </div>
-
-              {/* 이름 + 소개 */}
-              <div className="space-y-3">
-                <div>
-                  <h2 className="font-display text-xl font-semibold tracking-tight text-foreground">
-                    Dongjun Son
-                  </h2>
-                  <p className="mt-0.5 text-sm text-muted-foreground">손동주</p>
-                </div>
-                <p className="text-sm leading-[1.8] text-foreground/75">
-                  Senior CS student at Kangwon National University. Incoming Data Science Master's student (Sep 2026).
-                </p>
-                <p className="text-sm leading-[1.8] text-foreground/75">
-                  Research intern at the Human–AI Interaction Lab. Previously at NSHC SafeSquare (Singapore) and KNU Hospital.
-                </p>
-                <p className="text-sm leading-[1.8] text-foreground/75">
-                  Interested in ML, HCI, and security — with a soft spot for 3D graphics.
-                </p>
+          {/* ── 왼쪽: 사진 (sticky) ── */}
+          <aside className="lg:sticky lg:top-20 lg:w-56 lg:shrink-0 lg:self-start">
+            <div className="aspect-square w-40 overflow-hidden rounded-2xl bg-muted/60 ring-1 ring-border/40 lg:w-full">
+              {/* 사진 파일을 asset/ 에 넣고 아래 주석 해제하세요 */}
+              {/* <img src={profilePhoto} alt="Dongjun Son" className="h-full w-full object-cover" /> */}
+              <div className="flex h-full w-full items-center justify-center text-6xl text-muted-foreground/20 select-none">
+                📷
               </div>
             </div>
           </aside>
 
-          {/* ── 오른쪽: Experience / Awards / Projects ── */}
+          {/* ── 오른쪽: About / Experience / Awards ── */}
           <div className="min-w-0 flex-1 space-y-14">
+
+            {/* About */}
+            <section className="space-y-3">
+              <h2 className="font-display text-2xl font-semibold tracking-tight text-foreground/95">
+                Dongjun Son
+              </h2>
+              <Separator className="opacity-50" />
+              <p className="text-[15px] leading-[1.85] text-foreground/75">
+                Senior CS student at Kangwon National University, currently working in the Human–AI Interaction Lab under Auk Kim. Incoming Data Science Master's student (Sep 2026). Previously worked at the Korea Clinical Medicine Center at KNU Hospital and NSHC SafeSquare in Singapore.
+              </p>
+            </section>
 
             {/* Experience */}
             <section className="space-y-5">
