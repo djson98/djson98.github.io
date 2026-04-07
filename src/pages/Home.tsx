@@ -93,7 +93,7 @@ const cvHeader3 =
 
 /** Experience 상세: 로고 열 | 본문 열 (테두리 없음) */
 const expDetailGrid =
-  'grid grid-cols-[minmax(2.75rem,auto)_1fr] gap-x-3 items-center min-w-0'
+  'grid grid-cols-[minmax(2.75rem,auto)_1fr] gap-x-3 items-start min-w-0'
 
 function CvColumnHead3({
   left,
