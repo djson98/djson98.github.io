@@ -1,13 +1,36 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
   <head>
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem('theme')
+          if (
+            t === 'dark' ||
+            (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)
+          ) {
+            document.documentElement.classList.add('dark')
+          }
+        } catch (e) {}
+      })()
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Dongju Son — portfolio: research & engineering at Kangwon National University (HAI Lab), projects in NLP, ML, web, and security."
+    />
+    <meta property="og:title" content="Dongju Son" />
+    <meta
+      property="og:description"
+      content="Portfolio — research, ML/NLP, web, and internships (KNU, KCMED, SAFE SQUARE)."
+    />
+    <meta property="og:type" content="website" />
     <title>Dongju Son</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:ital,wght@0,500..800;1,500..800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400..700;1,400..700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..700;1,8..60,400..700&display=swap"
       rel="stylesheet"
     />
   </head>

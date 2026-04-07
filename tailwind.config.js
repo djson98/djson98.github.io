@@ -5,10 +5,10 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        /** 본문·표·카드 본문 */
+        /** 본문·표·카드 (학술 포트폴리오 본문) */
         sans: ['Inter', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
-        /** 이름·페이지 제목·섹션 제목 */
-        display: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
+        /** 제목·이름 — seooyxx / al-folio 류의 세리프 톤 */
+        display: ['"Source Serif 4"', 'Georgia', 'Cambria', 'Times New Roman', 'serif'],
       },
       colors: {
         border: 'hsl(var(--border))',
