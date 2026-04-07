@@ -61,7 +61,7 @@ const experience: ExperienceItem[] = [
 
 const awards = [
   {
-    title: 'Encouragement Award, Capstone Project Competition',
+    title: 'Honorable Mention, Capstone Project Competition',
     year: '2025',
     tags: ['Capstone', 'Competition'],
   },
