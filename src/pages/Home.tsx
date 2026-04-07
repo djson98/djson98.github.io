@@ -216,7 +216,9 @@ export default function Home() {
                 Dongjun Son
               </h2>
               <p className="text-sm leading-[1.8] text-foreground/70">
-                Senior CS student at Kangwon National University, currently working in the Human–AI Interaction Lab under Auk Kim. Incoming Data Science Master's student (Sep 2026). Previously worked at the Korea Clinical Medicine Center at KNU Hospital and NSHC SafeSquare in Singapore.
+                Senior CS student at Kangwon National University, currently working in the Human–AI Interaction Lab under Auk Kim. Incoming Data Science Master's student (Sep 2026).{' '}
+                <br />
+                Previously worked at the Korea Clinical Medicine Center at KNU Hospital and NSHC SafeSquare in Singapore.
               </p>
             </div>
           </aside>
