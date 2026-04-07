@@ -24,6 +24,17 @@ The system processed 50,000+ cumulative requests and was deployed in a productio
 Received the Excellence Award from the Regional Intelligence Center Creative & Autonomous Project Program.`,
   },
   {
+    id: 'hai-lab-website',
+    title: 'HAI Lab Website',
+    period: '2024',
+    tags: ['Web', 'HCI'],
+    summary: 'Developed and maintained the official website for the Human–AI Interaction Lab at Kangwon National University.',
+    gradient: 'from-sky-500 to-cyan-500',
+    description: `Developed and maintained the official website for the Human–AI Interaction Lab (HAI Lab) at Kangwon National University, led by Prof. Auk Kim.
+
+Responsible for building and updating the lab's web presence, including research publications, team member profiles, and project showcases.`,
+  },
+  {
     id: 'campus-notice-aggregator',
     title: 'Campus Notice Aggregator & Curator',
     period: '2025',

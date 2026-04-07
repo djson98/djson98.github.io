@@ -31,7 +31,7 @@ const experience: ExperienceItem[] = [
     logo: haiLogo,
     items: [
       { text: 'AI Civil Complaint Classification — Built and deployed an NLP/ML system to classify civil complaints for the university cloud portal and mobile app (50,000+ requests). Excellence Award, Regional Intelligence Center.', projectId: 'ai-civil-complaint' },
-      { text: 'Developed and maintained the lab website.' },
+      { text: 'Developed and maintained the lab website.', projectId: 'hai-lab-website' },
     ],
     tags: ['NLP', 'ML', 'Web', 'HCI'],
   },
