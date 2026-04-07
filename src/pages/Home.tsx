@@ -225,7 +225,15 @@ export default function Home() {
                 >
                   Human–AI Interaction Lab
                 </a>
-                {' '}under Auk Kim. Incoming Data Science Master's student (Sep 2026).{' '}
+                {' '}under{' '}
+                <a
+                  href="https://kimauk.github.io"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-foreground/90 underline underline-offset-2 decoration-muted-foreground/30 hover:decoration-foreground hover:text-foreground transition-colors"
+                >
+                  Auk Kim
+                </a>. Incoming Data Science Master's student (Sep 2026).{' '}
                 <br />
                 Previously worked at the Korea Clinical Medicine Center at KNU Hospital and NSHC SafeSquare in Singapore.
               </p>
