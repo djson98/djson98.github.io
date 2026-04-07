@@ -25,8 +25,8 @@ function disposeObject3D(root: THREE.Object3D) {
 
 /** 풀잎: 4단계 곡선형, 밑동 넓고 끝 살짝 앞으로 휘어짐 */
 function createBladeGeometry(): THREE.BufferGeometry {
-  const bw = 0.022
-  const h = 0.10
+  const bw = 0.025
+  const h = 0.18
   // 각 레벨: [left-x, right-x, y, z-curve]
   const levels = [
     [ -bw,      bw,      0,       0      ],  // 0,1 base
@@ -190,7 +190,7 @@ export default function GrassCapybaraThree() {
         Math.random() * Math.PI * 2,
         0,
       )
-      dummy.scale.setScalar(0.45 + Math.random() * 0.45)
+      dummy.scale.setScalar(0.7 + Math.random() * 0.7)
       dummy.updateMatrix()
       grassMesh.setMatrixAt(i, dummy.matrix)
     }
