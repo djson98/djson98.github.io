@@ -119,6 +119,38 @@ export default function Home() {
       <div className="mx-auto max-w-6xl space-y-14 px-6 py-14 sm:py-16">
         <Separator className="opacity-60" />
 
+        {/* About */}
+        <section className="flex flex-col gap-8 sm:flex-row sm:items-start sm:gap-12">
+          {/* 사진 */}
+          <div className="shrink-0 sm:w-48">
+            <div className="aspect-square w-36 overflow-hidden rounded-2xl bg-muted/60 ring-1 ring-border/40 sm:w-48">
+              {/* 사진 파일을 asset/ 에 넣고 아래 src 경로를 바꿔주세요 */}
+              {/* <img src={profilePhoto} alt="Dongjun Son" className="h-full w-full object-cover" /> */}
+              <div className="flex h-full w-full items-center justify-center text-muted-foreground/30 text-5xl select-none">
+                📷
+              </div>
+            </div>
+          </div>
+
+          {/* 소개 텍스트 */}
+          <div className="space-y-4 text-[15px] leading-[1.8] text-foreground/80 sm:text-base">
+            <h2 className="font-display text-2xl font-semibold tracking-tight text-foreground/95 sm:text-3xl">
+              About Me
+            </h2>
+            <p>
+              Hi, I'm <span className="font-medium text-foreground">Dongjun Son</span> — a senior Computer Science student at Kangwon National University and an incoming Data Science Master's student (Sep 2026).
+            </p>
+            <p>
+              I work as a research intern at the <span className="font-medium text-foreground">Human–AI Interaction Lab</span> under Prof. Auk Kim, where I build NLP/ML systems and explore how AI can work better with people. Previously, I interned at the Korea Clinical Medicine Center at KNU Hospital and at <span className="font-medium text-foreground">NSHC SafeSquare in Singapore</span>, working on clinical ML and AI-driven security automation.
+            </p>
+            <p>
+              My interests span machine learning, human-computer interaction, and security — with a growing love for 3D graphics on the side.
+            </p>
+          </div>
+        </section>
+
+        <Separator className="opacity-60" />
+
         {/* Experience */}
         <section className="space-y-5">
           <h2 className="font-display text-2xl font-semibold tracking-tight text-foreground/95 sm:text-3xl">
