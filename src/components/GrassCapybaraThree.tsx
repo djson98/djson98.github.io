@@ -45,14 +45,37 @@ export default function GrassCapybaraThree() {
     renderer.outputColorSpace = THREE.SRGBColorSpace
     el.appendChild(renderer.domElement)
     renderer.domElement.style.cursor = 'grab'
-    renderer.domElement.addEventListener('pointerdown', () => {
-      renderer.domElement.style.cursor = 'grabbing'
+
+    let overCapybara = false
+    renderer.domElement.addEventListener('pointermove', (e) => {
+      const rect = renderer.domElement.getBoundingClientRect()
+      mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1
+      mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1
+      raycaster.setFromCamera(mouse, camera)
+      const hits = raycaster.intersectObject(group, true)
+      overCapybara = hits.length > 0
+      renderer.domElement.style.cursor = overCapybara ? 'pointer' : 'grab'
+    })
+    renderer.domElement.addEventListener('pointerdown', (e) => {
+      const rect = renderer.domElement.getBoundingClientRect()
+      mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1
+      mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1
+      raycaster.setFromCamera(mouse, camera)
+      const hits = raycaster.intersectObject(group, true)
+      if (hits.length > 0) {
+        // 카피바라 클릭 → 점프
+        jumpVelocity = JUMP_FORCE
+        isJumping = true
+      } else {
+        renderer.domElement.style.cursor = 'grabbing'
+      }
     })
     renderer.domElement.addEventListener('pointerup', () => {
-      renderer.domElement.style.cursor = 'grab'
+      renderer.domElement.style.cursor = overCapybara ? 'pointer' : 'grab'
     })
     renderer.domElement.addEventListener('pointerleave', () => {
       renderer.domElement.style.cursor = 'grab'
+      overCapybara = false
     })
 
     const controls = new OrbitControls(camera, renderer.domElement)
@@ -96,12 +119,23 @@ export default function GrassCapybaraThree() {
     let proceduralWalk = false
     let walkPhase = 0
 
+    /** 점프 상태 */
+    let jumpVelocity = 0
+    let jumpY = 0
+    let isJumping = false
+    const JUMP_FORCE = 0.7
+    const GRAVITY = 2.4
+
     /** 화면 가로로 지나가 보이도록 넓게 (Orbit target을 고정해야 좌표 이동이 보임) */
     const walkBounds = { min: -1.05, max: 1.05 }
     const walkSpeed = 0.09
     /** 1: 왼쪽→오른쪽(+X), -1: 오른쪽→왼쪽 */
     let walkDir = 1
     group.position.x = walkBounds.min
+
+    /** 레이캐스터 */
+    const raycaster = new THREE.Raycaster()
+    const mouse = new THREE.Vector2()
 
     const loader = new GLTFLoader()
     loader.load(
@@ -171,13 +205,24 @@ export default function GrassCapybaraThree() {
       }
       group.position.x = nextX
 
+      // 점프 물리
+      if (isJumping) {
+        jumpVelocity -= GRAVITY * delta
+        jumpY += jumpVelocity * delta
+        if (jumpY <= 0) {
+          jumpY = 0
+          jumpVelocity = 0
+          isJumping = false
+        }
+      }
+
       if (proceduralWalk) {
         walkPhase += delta * Math.PI * 2 * 0.85
         const s = Math.sin(walkPhase)
-        group.position.y = s * 0.016
-        group.rotation.z = s * 0.045
+        group.position.y = jumpY + s * 0.016
+        group.rotation.z = isJumping ? 0 : s * 0.045
       } else {
-        group.position.y = 0
+        group.position.y = jumpY
         group.rotation.z = 0
       }
 
