@@ -128,7 +128,7 @@ export default function Home() {
       </section>
 
       {/* Content: 2-column layout */}
-      <div className="mx-auto max-w-7xl px-4 sm:px-8 py-14 sm:py-16">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 py-14 sm:py-16">
         <div className="flex flex-col gap-14 lg:flex-row lg:gap-16">
 
           {/* ── 왼쪽: Experience / Awards ── */}
@@ -140,52 +140,57 @@ export default function Home() {
                 Experience
               </h2>
               <Separator className="opacity-50" />
-              <div className="space-y-3">
-                <CvColumnHead3 left="Date" center="Details" right="Tags" />
-                <div className="space-y-6">
-                  {experience.map((exp) => {
-                    const detailBody = (
-                      <div className="min-w-0 space-y-2.5">
-                        <p className="text-[17px] font-semibold leading-snug tracking-tight text-foreground">
-                          {exp.org}
-                        </p>
-                        <p className="text-[13px] leading-relaxed text-muted-foreground sm:text-sm">
-                          {[exp.role, exp.location].filter(Boolean).join(' · ')}
-                        </p>
-                        <ul className="space-y-1.5 pl-1">
-                          {exp.items.map((item) => (
-                            <li key={item.text} className="text-sm leading-[1.7] text-foreground/75 sm:text-[15px]">
-                              {item.projectId ? (
-                                <Link
-                                  to={`/projects/${item.projectId}`}
-                                  className="inline-flex items-baseline gap-0.5 text-foreground/70 underline-offset-2 hover:underline hover:text-foreground transition-colors group"
-                                >
-                                  {item.text}
-                                  <ArrowUpRight className="inline h-3.5 w-3.5 shrink-0 self-center text-muted-foreground/60 group-hover:text-foreground transition-colors" />
-                                </Link>
-                              ) : item.text}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    )
-                    return (
-                      <div key={exp.org} className={cvGrid3}>
-                        <div className={cn(cvColDate, exp.logo && 'pt-3')}>{exp.period}</div>
-                        <div className="min-w-0">
-                          {exp.logo ? (
-                            <div className={expDetailGrid}>
-                              <img src={exp.logo} alt="" className="max-h-8 max-w-[4rem] w-auto h-auto shrink-0" width={40} height={40} />
-                              {detailBody}
-                            </div>
-                          ) : detailBody}
+              <table className="w-full border-collapse text-base sm:text-[17px] leading-[1.7]">
+                <thead className="hidden sm:table-header-group">
+                  <tr className="text-[0.65rem] font-semibold uppercase tracking-[0.12em] text-muted-foreground/80">
+                    <th className="pb-2.5 text-left font-semibold pr-6 whitespace-nowrap">Date</th>
+                    <th className="pb-2.5 text-left font-semibold px-6">Details</th>
+                    <th className="pb-2.5 text-right font-semibold">Tags</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {experience.map((exp) => (
+                    <tr key={exp.org} className="group align-top transition-colors hover:bg-muted/50">
+                      <td className={cn(cvColDate, 'pr-6 py-2 whitespace-nowrap', exp.logo && 'pt-4')}>
+                        {exp.period}
+                      </td>
+                      <td className="px-6 py-2 min-w-0">
+                        <div className={exp.logo ? expDetailGrid : ''}>
+                          {exp.logo && (
+                            <img src={exp.logo} alt="" className="max-h-8 max-w-[4rem] w-auto h-auto shrink-0" width={40} height={40} />
+                          )}
+                          <div className="min-w-0 space-y-2.5">
+                            <p className="text-[17px] font-semibold leading-snug tracking-tight text-foreground">
+                              {exp.org}
+                            </p>
+                            <p className="text-[13px] leading-relaxed text-muted-foreground sm:text-sm">
+                              {[exp.role, exp.location].filter(Boolean).join(' · ')}
+                            </p>
+                            <ul className="space-y-1.5 pl-1">
+                              {exp.items.map((item) => (
+                                <li key={item.text} className="text-sm leading-[1.7] text-foreground/75 sm:text-[15px]">
+                                  {item.projectId ? (
+                                    <Link
+                                      to={`/projects/${item.projectId}`}
+                                      className="inline-flex items-baseline gap-0.5 text-foreground/70 underline-offset-2 hover:underline hover:text-foreground transition-colors group"
+                                    >
+                                      {item.text}
+                                      <ArrowUpRight className="inline h-3.5 w-3.5 shrink-0 self-center text-muted-foreground/60 group-hover:text-foreground transition-colors" />
+                                    </Link>
+                                  ) : item.text}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
                         </div>
-                        <ProjectTagChips tags={exp.tags} className="justify-start sm:justify-end sm:pt-0.5" />
-                      </div>
-                    )
-                  })}
-                </div>
-              </div>
+                      </td>
+                      <td className="py-2 text-right align-top">
+                        <ProjectTagChips tags={exp.tags} className="justify-end" />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </section>
 
             {/* Awards */}
@@ -194,13 +199,19 @@ export default function Home() {
                 Honors & Awards
               </h2>
               <Separator className="opacity-50" />
-              <div className="space-y-3">
-                <CvColumnHead3 left="Date" center="Title" right="Tags" />
-                <ul className="space-y-3">
+              <table className="w-full border-collapse text-base sm:text-[17px] leading-[1.7]">
+                <thead className="hidden sm:table-header-group">
+                  <tr className="text-[0.65rem] font-semibold uppercase tracking-[0.12em] text-muted-foreground/80">
+                    <th className="pb-2.5 text-left font-semibold pr-6 whitespace-nowrap">Date</th>
+                    <th className="pb-2.5 text-left font-semibold px-6">Title</th>
+                    <th className="pb-2.5 text-right font-semibold">Tags</th>
+                  </tr>
+                </thead>
+                <tbody>
                   {awards.map((a) => (
-                    <li key={a.title} className={cvGrid3}>
-                      <div className={cvColDate}>{a.year}</div>
-                      <span className="min-w-0 leading-relaxed text-foreground/85">
+                    <tr key={a.title} className="group align-top transition-colors hover:bg-muted/50">
+                      <td className={cn(cvColDate, 'pr-6 py-2 whitespace-nowrap')}>{a.year}</td>
+                      <td className="px-6 py-2 min-w-0 leading-relaxed text-foreground/85">
                         {a.title}
                         {'link' in a && a.link && (
                           <a
@@ -209,16 +220,18 @@ export default function Home() {
                             rel="noopener noreferrer"
                             className="ml-2 inline-flex items-center gap-0.5 text-[11px] font-medium text-muted-foreground/50 hover:text-foreground transition-colors"
                           >
-                            {'linkLabel' in a ? a.linkLabel as string : 'link'}
+                            {('linkLabel' in a ? a.linkLabel as string : undefined) ?? 'link'}
                             <ArrowUpRight className="h-3 w-3" />
                           </a>
                         )}
-                      </span>
-                      <ProjectTagChips tags={a.tags} className="justify-start sm:justify-end sm:pt-0.5" />
-                    </li>
+                      </td>
+                      <td className="py-2 text-right align-top">
+                        <ProjectTagChips tags={a.tags} className="justify-end" />
+                      </td>
+                    </tr>
                   ))}
-                </ul>
-              </div>
+                </tbody>
+              </table>
             </section>
 
             {/* Additional */}
@@ -227,25 +240,33 @@ export default function Home() {
                 Additional
               </h2>
               <Separator className="opacity-50" />
-              <div className="space-y-3">
-                <CvColumnHead3 left="Date" center="Title" right="Tags" />
-                <ul className="space-y-3">
+              <table className="w-full border-collapse text-base sm:text-[17px] leading-[1.7]">
+                <thead className="hidden sm:table-header-group">
+                  <tr className="text-[0.65rem] font-semibold uppercase tracking-[0.12em] text-muted-foreground/80">
+                    <th className="pb-2.5 text-left font-semibold pr-6 whitespace-nowrap">Date</th>
+                    <th className="pb-2.5 text-left font-semibold px-6">Title</th>
+                    <th className="pb-2.5 text-right font-semibold">Tags</th>
+                  </tr>
+                </thead>
+                <tbody>
                   {additional.map((a) => (
-                    <li key={a.title} className={cvGrid3}>
-                      <div className={cvColDate}>{a.year}</div>
-                      <span className="min-w-0 leading-relaxed text-foreground/85">{a.title}</span>
-                      <ProjectTagChips tags={a.tags} className="justify-start sm:justify-end sm:pt-0.5" />
-                    </li>
+                    <tr key={a.title} className="group align-top transition-colors hover:bg-muted/50">
+                      <td className={cn(cvColDate, 'pr-6 py-2 whitespace-nowrap')}>{a.year}</td>
+                      <td className="px-6 py-2 min-w-0 leading-relaxed text-foreground/85">{a.title}</td>
+                      <td className="py-2 text-right align-top">
+                        <ProjectTagChips tags={a.tags} className="justify-end" />
+                      </td>
+                    </tr>
                   ))}
-                </ul>
-              </div>
+                </tbody>
+              </table>
             </section>
 
           </div>
 
           {/* ── 오른쪽: 사진 + 소개 (sticky) ── */}
-          <aside className="lg:sticky lg:top-20 lg:w-56 lg:shrink-0 lg:self-start space-y-5">
-            <div className="aspect-square w-40 overflow-hidden rounded-2xl bg-muted/60 ring-1 ring-border/40 lg:w-full">
+          <aside className="lg:sticky lg:top-20 lg:w-72 lg:shrink-0 lg:self-start space-y-5">
+            <div className="aspect-square w-48 overflow-hidden rounded-2xl bg-muted/60 ring-1 ring-border/40 lg:w-full">
               {/* 사진 파일을 asset/ 에 넣고 아래 주석 해제하세요 */}
               {/* <img src={profilePhoto} alt="Dongjun Son" className="h-full w-full object-cover" /> */}
               <div className="flex h-full w-full items-center justify-center text-6xl text-muted-foreground/20 select-none">
