@@ -1,5 +1,6 @@
 import { lazy, Suspense } from 'react'
 import { Link } from 'react-router-dom'
+import { ArrowUpRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { ProjectTagChips } from '@/components/ProjectTagChips'
 import { Separator } from '@/components/ui/separator'
@@ -149,9 +150,10 @@ export default function Home() {
                               {item.projectId ? (
                                 <Link
                                   to={`/projects/${item.projectId}`}
-                                  className="underline-offset-2 hover:underline hover:text-foreground transition-colors"
+                                  className="inline-flex items-baseline gap-0.5 underline-offset-2 hover:underline hover:text-foreground transition-colors group"
                                 >
                                   {item.text}
+                                  <ArrowUpRight className="inline h-3.5 w-3.5 shrink-0 self-center text-muted-foreground/60 group-hover:text-foreground transition-colors" />
                                 </Link>
                               ) : item.text}
                             </li>
