@@ -228,8 +228,11 @@ export default function GrassCapybaraThree() {
 
       group.rotation.y = facePlusX + (walkDir < 0 ? Math.PI : 0)
 
-      // 타깃 Y에 보빙을 더하면 카메라가 같이 흔들려 땅이 움직이는 것처럼 보임 → 높이 고정
-      controls.target.set(0, 0.12, 0)
+      // 카피바라 X를 부드럽게 따라가되 Y는 고정 (보빙/점프에 카메라 안 흔들리게)
+      const followLerp = 1 - Math.pow(0.02, delta)
+      controls.target.x += (group.position.x - controls.target.x) * followLerp
+      controls.target.y = 0.12
+      controls.target.z = 0
       if (mixer) mixer.update(delta)
       controls.update()
       renderer.render(scene, camera)
