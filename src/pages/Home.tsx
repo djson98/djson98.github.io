@@ -26,7 +26,7 @@ const experience: ExperienceItem[] = [
   {
     org: 'Human–AI Interaction Lab, Kangwon National University',
     role: 'Research Intern',
-    period: 'Dec 2023 – Present',
+    period: 'Dec. 2023 – Present',
     location: 'Chuncheon, South Korea',
     logo: haiLogo,
     items: [
@@ -38,7 +38,7 @@ const experience: ExperienceItem[] = [
   {
     org: 'NSHC Singapore, Safe Square',
     role: 'Intern',
-    period: 'Jan 2026 – Feb 2026',
+    period: 'Jan. 2026 – Feb. 2026',
     location: 'Singapore',
     logo: nshcLogo,
     items: [
@@ -49,7 +49,7 @@ const experience: ExperienceItem[] = [
   {
     org: 'The Korea Clinical Medicine Center (KCMED)',
     role: 'Intern',
-    period: 'Aug 2024 – Dec 2024',
+    period: 'Aug. 2024 – Dec. 2024',
     location: 'Chuncheon, South Korea',
     logo: kcmedLogo,
     items: [
@@ -62,7 +62,7 @@ const experience: ExperienceItem[] = [
 const additional = [
   { title: 'Teaching Assistant, Python Programming', year: '2024 – 2026', tags: ['Teaching'] },
   { title: 'Teaching Assistant, Web Programming', year: '2024 – 2026', tags: ['Teaching'] },
-  { title: 'Founder, CapybaraLab (registered business)', year: 'Sep 2025', tags: ['Entrepreneurship'] },
+  { title: 'Founder, CapybaraLab (registered business)', year: 'Sep. 2025', tags: ['Entrepreneurship'] },
 ]
 
 const awards = [
@@ -85,9 +85,9 @@ const awards = [
 
 /** 날짜 | 본문 | 태그, 테두리 없음 */
 const cvGrid3 =
-  'group grid grid-cols-1 sm:grid-cols-[minmax(7.5rem,auto)_1fr_minmax(0,5.5rem)] gap-x-6 sm:gap-x-8 gap-y-2 sm:gap-y-1 items-start text-[15px] sm:text-base leading-[1.65] rounded-lg -mx-3 px-3 py-2 transition-colors hover:bg-muted/50'
+  'group grid grid-cols-1 sm:grid-cols-[minmax(7.5rem,auto)_1fr_minmax(0,5.5rem)] gap-x-6 sm:gap-x-8 gap-y-2 sm:gap-y-1 items-start text-base sm:text-[17px] leading-[1.7] rounded-lg -mx-3 px-3 py-2 transition-colors hover:bg-muted/50'
 const cvColDate =
-  'text-[11px] sm:text-xs text-muted-foreground/60 tabular-nums whitespace-nowrap sm:pt-0.5 font-medium transition-colors group-hover:text-muted-foreground'
+  'text-xs sm:text-[13px] text-muted-foreground/60 tabular-nums whitespace-nowrap sm:pt-0.5 font-medium transition-colors group-hover:text-muted-foreground'
 const cvHeader3 =
   'hidden sm:grid sm:grid-cols-[minmax(7.5rem,auto)_1fr_auto] gap-x-6 sm:gap-x-8 pb-2.5 text-[0.65rem] font-semibold uppercase tracking-[0.12em] text-muted-foreground/80'
 
@@ -144,7 +144,7 @@ export default function Home() {
                   {experience.map((exp) => {
                     const detailBody = (
                       <div className="min-w-0 space-y-2.5">
-                        <p className="text-base font-semibold leading-snug tracking-tight text-foreground">
+                        <p className="text-[17px] font-semibold leading-snug tracking-tight text-foreground">
                           {exp.org}
                         </p>
                         <p className="text-[13px] leading-relaxed text-muted-foreground sm:text-sm">
@@ -152,7 +152,7 @@ export default function Home() {
                         </p>
                         <ul className="space-y-1.5 pl-1">
                           {exp.items.map((item) => (
-                            <li key={item.text} className="text-[14px] leading-[1.7] text-foreground/80 sm:text-[15px]">
+                            <li key={item.text} className="text-[15px] leading-[1.7] text-foreground/80 sm:text-[17px]">
                               {item.projectId ? (
                                 <Link
                                   to={`/projects/${item.projectId}`}
@@ -173,7 +173,7 @@ export default function Home() {
                         <div className="min-w-0">
                           {exp.logo ? (
                             <div className={expDetailGrid}>
-                              <img src={exp.logo} alt="" className="h-11 w-11 shrink-0 object-contain sm:mt-0.5" width={44} height={44} />
+                              <img src={exp.logo} alt="" className="h-12 w-12 shrink-0 object-contain sm:mt-1" width={48} height={48} />
                               {detailBody}
                             </div>
                           ) : detailBody}
