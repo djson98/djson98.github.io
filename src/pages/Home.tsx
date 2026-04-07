@@ -39,6 +39,7 @@ const experience: ExperienceItem[] = [
     org: 'NSHC Singapore, Safe Square',
     role: 'Intern',
     period: 'Jan 2026 – Feb 2026',
+    location: 'Singapore',
     logo: nshcLogo,
     items: [
       { text: 'AI Phishing Training Automation', projectId: 'ai-phishing-training' },
