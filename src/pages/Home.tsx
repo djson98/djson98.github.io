@@ -62,7 +62,7 @@ const experience: ExperienceItem[] = [
 const additional = [
   { title: 'Teaching Assistant, Python Programming', year: '2024 – 2026', tags: ['Teaching'] },
   { title: 'Teaching Assistant, Web Programming', year: '2024 – 2026', tags: ['Teaching'] },
-  { title: 'Founder, CapybaraLab (registered business)', year: 'Sep. 2025', tags: ['Entrepreneurship'] },
+  { title: 'Founder, CapybaraLab', year: 'Sep. 2025', tags: ['Entrepreneurship'] },
 ]
 
 const awards = [
