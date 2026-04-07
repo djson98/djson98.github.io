@@ -120,7 +120,7 @@ export default function Home() {
       </section>
 
       {/* Content: 2-column layout */}
-      <div className="mx-auto max-w-6xl px-6 py-14 sm:py-16">
+      <div className="mx-auto max-w-7xl px-4 sm:px-8 py-14 sm:py-16">
         <div className="flex flex-col gap-14 lg:flex-row lg:gap-16">
 
           {/* ── 왼쪽: Experience / Awards ── */}
