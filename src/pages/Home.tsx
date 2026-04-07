@@ -1,4 +1,5 @@
 import { lazy, Suspense } from 'react'
+import { Link } from 'react-router-dom'
 import { cn } from '@/lib/utils'
 import { ProjectTagChips } from '@/components/ProjectTagChips'
 import { Separator } from '@/components/ui/separator'
@@ -8,13 +9,14 @@ import haiLogo from '../../asset/hai.png'
 import kcmedLogo from '../../asset/logo.png'
 import nshcLogo from '../../asset/nshc.png'
 
+type BulletItem = { text: string; projectId?: string }
+
 type ExperienceItem = {
   org: string
   role: string
   period: string
-  /** 비우면 역할만 표시 (제목에 지역이 이미 있을 때 등) */
   location?: string
-  items: string[]
+  items: BulletItem[]
   logo?: string
   tags: string[]
 }
@@ -27,8 +29,8 @@ const experience: ExperienceItem[] = [
     location: 'Chuncheon, South Korea',
     logo: haiLogo,
     items: [
-      'AI Civil Complaint Classification — Built and deployed an NLP/ML system to classify civil complaints for the university cloud portal and mobile app (50,000+ requests). Excellence Award, Regional Intelligence Center.',
-      'Developed and maintained the lab website.',
+      { text: 'AI Civil Complaint Classification — Built and deployed an NLP/ML system to classify civil complaints for the university cloud portal and mobile app (50,000+ requests). Excellence Award, Regional Intelligence Center.', projectId: 'ai-civil-complaint' },
+      { text: 'Developed and maintained the lab website.' },
     ],
     tags: ['NLP', 'ML', 'Web', 'HCI'],
   },
@@ -38,7 +40,7 @@ const experience: ExperienceItem[] = [
     period: 'Jan 2026 – Feb 2026',
     logo: nshcLogo,
     items: [
-      'AI Phishing Training Automation — Automated creation and delivery of phishing-awareness training content using AI-driven pipelines.',
+      { text: 'AI Phishing Training Automation — Automated creation and delivery of phishing-awareness training content using AI-driven pipelines.', projectId: 'ai-phishing-training' },
     ],
     tags: ['AI', 'Security', 'Automation'],
   },
@@ -49,7 +51,7 @@ const experience: ExperienceItem[] = [
     location: 'Chuncheon, South Korea',
     logo: kcmedLogo,
     items: [
-      'Developed ML models and data visualization pipelines for clinical research.',
+      { text: 'Developed ML models and data visualization pipelines for clinical research.', projectId: 'clinical-ml' },
     ],
     tags: ['ML', 'Visualization', 'Clinical'],
   },
@@ -119,30 +121,8 @@ export default function Home() {
       <div className="mx-auto max-w-6xl px-6 py-14 sm:py-16">
         <div className="flex flex-col gap-14 lg:flex-row lg:gap-16">
 
-          {/* ── 왼쪽: 사진 (sticky) ── */}
-          <aside className="lg:sticky lg:top-20 lg:w-56 lg:shrink-0 lg:self-start">
-            <div className="aspect-square w-40 overflow-hidden rounded-2xl bg-muted/60 ring-1 ring-border/40 lg:w-full">
-              {/* 사진 파일을 asset/ 에 넣고 아래 주석 해제하세요 */}
-              {/* <img src={profilePhoto} alt="Dongjun Son" className="h-full w-full object-cover" /> */}
-              <div className="flex h-full w-full items-center justify-center text-6xl text-muted-foreground/20 select-none">
-                📷
-              </div>
-            </div>
-          </aside>
-
-          {/* ── 오른쪽: About / Experience / Awards ── */}
+          {/* ── 왼쪽: Experience / Awards ── */}
           <div className="min-w-0 flex-1 space-y-14">
-
-            {/* About */}
-            <section className="space-y-3">
-              <h2 className="font-display text-2xl font-semibold tracking-tight text-foreground/95">
-                Dongjun Son
-              </h2>
-              <Separator className="opacity-50" />
-              <p className="text-[15px] leading-[1.85] text-foreground/75">
-                Senior CS student at Kangwon National University, currently working in the Human–AI Interaction Lab under Auk Kim. Incoming Data Science Master's student (Sep 2026). Previously worked at the Korea Clinical Medicine Center at KNU Hospital and NSHC SafeSquare in Singapore.
-              </p>
-            </section>
 
             {/* Experience */}
             <section className="space-y-5">
@@ -164,8 +144,16 @@ export default function Home() {
                         </p>
                         <ul className="space-y-1.5 pl-1">
                           {exp.items.map((item) => (
-                            <li key={item} className="text-[14px] leading-[1.7] text-foreground/80 sm:text-[15px]">
-                              · {item}
+                            <li key={item.text} className="text-[14px] leading-[1.7] text-foreground/80 sm:text-[15px]">
+                              ·{' '}
+                              {item.projectId ? (
+                                <Link
+                                  to={`/projects/${item.projectId}`}
+                                  className="underline-offset-2 hover:underline hover:text-foreground transition-colors"
+                                >
+                                  {item.text}
+                                </Link>
+                              ) : item.text}
                             </li>
                           ))}
                         </ul>
@@ -211,6 +199,26 @@ export default function Home() {
             </section>
 
           </div>
+
+          {/* ── 오른쪽: 사진 + 소개 (sticky) ── */}
+          <aside className="lg:sticky lg:top-20 lg:w-56 lg:shrink-0 lg:self-start space-y-5">
+            <div className="aspect-square w-40 overflow-hidden rounded-2xl bg-muted/60 ring-1 ring-border/40 lg:w-full">
+              {/* 사진 파일을 asset/ 에 넣고 아래 주석 해제하세요 */}
+              {/* <img src={profilePhoto} alt="Dongjun Son" className="h-full w-full object-cover" /> */}
+              <div className="flex h-full w-full items-center justify-center text-6xl text-muted-foreground/20 select-none">
+                📷
+              </div>
+            </div>
+            <div className="space-y-2">
+              <h2 className="font-display text-lg font-semibold tracking-tight text-foreground">
+                Dongjun Son
+              </h2>
+              <p className="text-sm leading-[1.8] text-foreground/70">
+                Senior CS student at Kangwon National University, currently working in the Human–AI Interaction Lab under Auk Kim. Incoming Data Science Master's student (Sep 2026). Previously worked at the Korea Clinical Medicine Center at KNU Hospital and NSHC SafeSquare in Singapore.
+              </p>
+            </div>
+          </aside>
+
         </div>
       </div>
     </div>
