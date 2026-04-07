@@ -63,7 +63,7 @@ const awards = [
   {
     title: 'Honorable Mention, Capstone Project Competition',
     year: '2025',
-    tags: ['Capstone', 'Competition'],
+    tags: ['Capstone'],
   },
   {
     title: 'Excellence Award, Regional Intelligence Center Creative & Autonomous Project',
