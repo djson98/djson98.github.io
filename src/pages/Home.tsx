@@ -85,37 +85,11 @@ const awards = [
   },
 ]
 
-/** 날짜 | 본문 | 태그, 테두리 없음 */
-const cvGrid3 =
-  'group grid grid-cols-1 sm:grid-cols-[10rem_1fr_minmax(0,5.5rem)] gap-x-6 sm:gap-x-8 gap-y-2 sm:gap-y-1 items-start text-base sm:text-[17px] leading-[1.7] rounded-lg -mx-3 px-3 py-2 transition-colors hover:bg-muted/50'
 const cvColDate =
   'text-xs sm:text-[13px] text-muted-foreground/60 tabular-nums whitespace-nowrap font-medium transition-colors group-hover:text-muted-foreground'
-const cvHeader3 =
-  'hidden sm:grid sm:grid-cols-[10rem_1fr_auto] gap-x-6 sm:gap-x-8 pb-2.5 text-[0.65rem] font-semibold uppercase tracking-[0.12em] text-muted-foreground/80'
-
 /** Experience 상세: 로고 열 | 본문 열 (테두리 없음) */
 const expDetailGrid =
   'grid grid-cols-[minmax(2.75rem,auto)_1fr] gap-x-3 items-start min-w-0'
-
-function CvColumnHead3({
-  left,
-  center,
-  right,
-  className,
-}: {
-  left: string
-  center: string
-  right: string
-  className?: string
-}) {
-  return (
-    <div className={cn(cvHeader3, className)}>
-      <span>{left}</span>
-      <span>{center}</span>
-      <span className="text-right sm:min-w-[6.5rem]">{right}</span>
-    </div>
-  )
-}
 
 export default function Home() {
   return (
