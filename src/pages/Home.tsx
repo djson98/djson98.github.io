@@ -150,7 +150,7 @@ export default function Home() {
                               {item.projectId ? (
                                 <Link
                                   to={`/projects/${item.projectId}`}
-                                  className="inline-flex items-baseline gap-0.5 underline-offset-2 hover:underline hover:text-foreground transition-colors group"
+                                  className="inline-flex items-baseline gap-0.5 text-foreground/70 underline-offset-2 hover:underline hover:text-foreground transition-colors group"
                                 >
                                   {item.text}
                                   <ArrowUpRight className="inline h-3.5 w-3.5 shrink-0 self-center text-muted-foreground/60 group-hover:text-foreground transition-colors" />
