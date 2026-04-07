@@ -115,121 +115,114 @@ export default function Home() {
         </Suspense>
       </section>
 
-      {/* Content */}
-      <div className="mx-auto max-w-6xl space-y-14 px-6 py-14 sm:py-16">
-        <Separator className="opacity-60" />
+      {/* Content: 2-column layout */}
+      <div className="mx-auto max-w-6xl px-6 py-14 sm:py-16">
+        <div className="flex flex-col gap-14 lg:flex-row lg:gap-16">
 
-        {/* About */}
-        <section className="flex flex-col gap-8 sm:flex-row sm:items-start sm:gap-12">
-          {/* 사진 */}
-          <div className="shrink-0 sm:w-48">
-            <div className="aspect-square w-36 overflow-hidden rounded-2xl bg-muted/60 ring-1 ring-border/40 sm:w-48">
-              {/* 사진 파일을 asset/ 에 넣고 아래 src 경로를 바꿔주세요 */}
-              {/* <img src={profilePhoto} alt="Dongjun Son" className="h-full w-full object-cover" /> */}
-              <div className="flex h-full w-full items-center justify-center text-muted-foreground/30 text-5xl select-none">
-                📷
+          {/* ── 왼쪽: About (sticky) ── */}
+          <aside className="lg:sticky lg:top-20 lg:w-64 lg:shrink-0 lg:self-start">
+            <div className="space-y-6">
+              {/* 사진 */}
+              <div className="aspect-square w-40 overflow-hidden rounded-2xl bg-muted/60 ring-1 ring-border/40 lg:w-full">
+                {/* 사진 파일을 asset/ 에 넣고 아래 주석 해제하세요 */}
+                {/* <img src={profilePhoto} alt="Dongjun Son" className="h-full w-full object-cover" /> */}
+                <div className="flex h-full w-full items-center justify-center text-6xl text-muted-foreground/20 select-none">
+                  📷
+                </div>
+              </div>
+
+              {/* 이름 + 소개 */}
+              <div className="space-y-3">
+                <div>
+                  <h2 className="font-display text-xl font-semibold tracking-tight text-foreground">
+                    Dongjun Son
+                  </h2>
+                  <p className="mt-0.5 text-sm text-muted-foreground">손동주</p>
+                </div>
+                <p className="text-sm leading-[1.8] text-foreground/75">
+                  Senior CS student at Kangwon National University. Incoming Data Science Master's student (Sep 2026).
+                </p>
+                <p className="text-sm leading-[1.8] text-foreground/75">
+                  Research intern at the Human–AI Interaction Lab. Previously at NSHC SafeSquare (Singapore) and KNU Hospital.
+                </p>
+                <p className="text-sm leading-[1.8] text-foreground/75">
+                  Interested in ML, HCI, and security — with a soft spot for 3D graphics.
+                </p>
               </div>
             </div>
-          </div>
+          </aside>
 
-          {/* 소개 텍스트 */}
-          <div className="space-y-4 text-[15px] leading-[1.8] text-foreground/80 sm:text-base">
-            <h2 className="font-display text-2xl font-semibold tracking-tight text-foreground/95 sm:text-3xl">
-              About Me
-            </h2>
-            <p>
-              Hi, I'm <span className="font-medium text-foreground">Dongjun Son</span> — a senior Computer Science student at Kangwon National University and an incoming Data Science Master's student (Sep 2026).
-            </p>
-            <p>
-              I work as a research intern at the <span className="font-medium text-foreground">Human–AI Interaction Lab</span> under Prof. Auk Kim, where I build NLP/ML systems and explore how AI can work better with people. Previously, I interned at the Korea Clinical Medicine Center at KNU Hospital and at <span className="font-medium text-foreground">NSHC SafeSquare in Singapore</span>, working on clinical ML and AI-driven security automation.
-            </p>
-            <p>
-              My interests span machine learning, human-computer interaction, and security — with a growing love for 3D graphics on the side.
-            </p>
-          </div>
-        </section>
+          {/* ── 오른쪽: Experience / Awards / Projects ── */}
+          <div className="min-w-0 flex-1 space-y-14">
 
-        <Separator className="opacity-60" />
-
-        {/* Experience */}
-        <section className="space-y-5">
-          <h2 className="font-display text-2xl font-semibold tracking-tight text-foreground/95 sm:text-3xl">
-            Experience
-          </h2>
-          <div className="space-y-3">
-            <CvColumnHead3 left="Date" center="Details" right="Tags" />
-            <div className="space-y-6">
-              {experience.map((exp) => {
-                const detailBody = (
-                  <div className="min-w-0 space-y-2.5">
-                    <p className="text-base font-semibold leading-snug tracking-tight text-foreground">
-                      {exp.org}
-                    </p>
-                    <p className="text-[13px] leading-relaxed text-muted-foreground sm:text-sm">
-                      {[exp.role, exp.location].filter(Boolean).join(' · ')}
-                    </p>
-                    <ul className="space-y-1.5 pl-1">
-                      {exp.items.map((item) => (
-                        <li key={item} className="text-[14px] leading-[1.7] text-foreground/88 sm:text-[15px]">
-                          · {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )
-                return (
-                  <div key={exp.org} className={cvGrid3}>
-                    <div className={cvColDate}>{exp.period}</div>
-                    <div className="min-w-0">
-                      {exp.logo ? (
-                        <div className={expDetailGrid}>
-                          <img
-                            src={exp.logo}
-                            alt=""
-                            className="h-11 w-11 shrink-0 object-contain sm:mt-0.5"
-                            width={44}
-                            height={44}
-                          />
-                          {detailBody}
+            {/* Experience */}
+            <section className="space-y-5">
+              <h2 className="font-display text-2xl font-semibold tracking-tight text-foreground/95">
+                Experience
+              </h2>
+              <Separator className="opacity-50" />
+              <div className="space-y-3">
+                <CvColumnHead3 left="Date" center="Details" right="Tags" />
+                <div className="space-y-6">
+                  {experience.map((exp) => {
+                    const detailBody = (
+                      <div className="min-w-0 space-y-2.5">
+                        <p className="text-base font-semibold leading-snug tracking-tight text-foreground">
+                          {exp.org}
+                        </p>
+                        <p className="text-[13px] leading-relaxed text-muted-foreground sm:text-sm">
+                          {[exp.role, exp.location].filter(Boolean).join(' · ')}
+                        </p>
+                        <ul className="space-y-1.5 pl-1">
+                          {exp.items.map((item) => (
+                            <li key={item} className="text-[14px] leading-[1.7] text-foreground/80 sm:text-[15px]">
+                              · {item}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )
+                    return (
+                      <div key={exp.org} className={cvGrid3}>
+                        <div className={cvColDate}>{exp.period}</div>
+                        <div className="min-w-0">
+                          {exp.logo ? (
+                            <div className={expDetailGrid}>
+                              <img src={exp.logo} alt="" className="h-11 w-11 shrink-0 object-contain sm:mt-0.5" width={44} height={44} />
+                              {detailBody}
+                            </div>
+                          ) : detailBody}
                         </div>
-                      ) : (
-                        detailBody
-                      )}
-                    </div>
-                    <ProjectTagChips
-                      tags={exp.tags}
-                      className="justify-start sm:justify-end sm:pt-0.5"
-                    />
-                  </div>
-                )
-              })}
-            </div>
-          </div>
-        </section>
+                        <ProjectTagChips tags={exp.tags} className="justify-start sm:justify-end sm:pt-0.5" />
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+            </section>
 
-        <Separator />
+            {/* Awards */}
+            <section className="space-y-5">
+              <h2 className="font-display text-2xl font-semibold tracking-tight text-foreground/95">
+                Honors & Awards
+              </h2>
+              <Separator className="opacity-50" />
+              <div className="space-y-3">
+                <CvColumnHead3 left="Date" center="Title" right="Tags" />
+                <ul className="space-y-3">
+                  {awards.map((a) => (
+                    <li key={a.title} className={cvGrid3}>
+                      <div className={cvColDate}>{a.year}</div>
+                      <span className="min-w-0 leading-relaxed text-foreground/85">{a.title}</span>
+                      <ProjectTagChips tags={a.tags} className="justify-start sm:justify-end sm:pt-0.5" />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </section>
 
-        {/* Awards */}
-        <section className="space-y-5">
-          <h2 className="font-display text-2xl font-semibold tracking-tight text-foreground/95 sm:text-3xl">
-            Honors & Awards
-          </h2>
-          <div className="space-y-3">
-            <CvColumnHead3 left="Date" center="Title" right="Tags" />
-            <ul className="space-y-3">
-              {awards.map((a) => (
-                <li key={a.title} className={cvGrid3}>
-                  <div className={cvColDate}>{a.year}</div>
-                  <span className="min-w-0 leading-relaxed text-foreground/90">{a.title}</span>
-                  <ProjectTagChips
-                    tags={a.tags}
-                    className="justify-start sm:justify-end sm:pt-0.5"
-                  />
-                </li>
-              ))}
-            </ul>
           </div>
-        </section>
+        </div>
       </div>
     </div>
   )
