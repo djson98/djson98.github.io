@@ -15,7 +15,7 @@ export default function Navbar() {
       <nav className="mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
         <NavLink
           to="/"
-          className="font-display text-sm font-semibold tracking-tight text-foreground/95 transition-opacity hover:opacity-75"
+          className="font-display text-base font-semibold tracking-tight text-foreground/95 transition-colors hover:text-foreground/60"
         >
           Dongju Son
         </NavLink>
