@@ -175,7 +175,7 @@ export default function Home() {
                         <div className="min-w-0">
                           {exp.logo ? (
                             <div className={expDetailGrid}>
-                              <img src={exp.logo} alt="" className="h-10 w-10 shrink-0 object-contain object-left" width={40} height={40} />
+                              <img src={exp.logo} alt="" className="max-h-8 max-w-[4rem] w-auto h-auto shrink-0" width={40} height={40} />
                               {detailBody}
                             </div>
                           ) : detailBody}
