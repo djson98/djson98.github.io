@@ -146,7 +146,6 @@ export default function Home() {
                         <ul className="space-y-1.5 pl-1">
                           {exp.items.map((item) => (
                             <li key={item.text} className="text-[14px] leading-[1.7] text-foreground/80 sm:text-[15px]">
-                              ·{' '}
                               {item.projectId ? (
                                 <Link
                                   to={`/projects/${item.projectId}`}
