@@ -75,6 +75,8 @@ const awards = [
     title: 'Excellence Award, Regional Intelligence Center Creative & Autonomous Project',
     year: '2024',
     tags: ['AI'],
+    link: 'https://www.veritas-a.com/news/articleView.html?idxno=531813',
+    linkLabel: 'press',
   },
   {
     title: 'Outstanding Essay Award, Kangwon National University',
@@ -198,7 +200,20 @@ export default function Home() {
                   {awards.map((a) => (
                     <li key={a.title} className={cvGrid3}>
                       <div className={cvColDate}>{a.year}</div>
-                      <span className="min-w-0 leading-relaxed text-foreground/85">{a.title}</span>
+                      <span className="min-w-0 leading-relaxed text-foreground/85">
+                        {a.title}
+                        {'link' in a && a.link && (
+                          <a
+                            href={a.link as string}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="ml-2 inline-flex items-center gap-0.5 text-[11px] font-medium text-muted-foreground/50 hover:text-foreground transition-colors"
+                          >
+                            {'linkLabel' in a ? a.linkLabel as string : 'link'}
+                            <ArrowUpRight className="h-3 w-3" />
+                          </a>
+                        )}
+                      </span>
                       <ProjectTagChips tags={a.tags} className="justify-start sm:justify-end sm:pt-0.5" />
                     </li>
                   ))}
