@@ -23,29 +23,35 @@ function disposeObject3D(root: THREE.Object3D) {
   })
 }
 
-/** 풀잎 하나: 밑동 넓고 끝으로 갈수록 좁아지는 5-vertex 블레이드 */
+/** 풀잎: 4단계 곡선형, 밑동 넓고 끝 살짝 앞으로 휘어짐 */
 function createBladeGeometry(): THREE.BufferGeometry {
-  const bw = 0.025
-  const h = 0.18
-  const positions = new Float32Array([
-    -bw,      0,    0,  // 0 base-left
-     bw,      0,    0,  // 1 base-right
-    -bw * 0.5, h * 0.5, 0,  // 2 mid-left
-     bw * 0.5, h * 0.5, 0,  // 3 mid-right
-     0,        h,    0,  // 4 tip
-  ])
-  const uvs = new Float32Array([
-    0,   0,
-    1,   0,
-    0,   0.5,
-    1,   0.5,
-    0.5, 1,
-  ])
-  const indices = new Uint16Array([0, 1, 3, 0, 3, 2, 2, 3, 4])
+  const bw = 0.022
+  const h = 0.10
+  // 각 레벨: [left-x, right-x, y, z-curve]
+  const levels = [
+    [ -bw,      bw,      0,       0      ],  // 0,1 base
+    [ -bw*0.7,  bw*0.7,  h*0.35,  0.005  ],  // 2,3 lower-mid
+    [ -bw*0.35, bw*0.35, h*0.7,   0.014  ],  // 4,5 upper-mid
+    [  0,       0,       h,       0.022  ],  // 6   tip (degenerate)
+  ]
+  const pos: number[] = []
+  const uvs: number[] = []
+  levels.forEach(([lx, rx, y, z], i) => {
+    const v = i / (levels.length - 1)
+    pos.push(lx, y, z,  rx, y, z)
+    uvs.push(0, v,  1, v)
+  })
+  // tip: merge last two to single point
+  // indices: pairs of quads across levels
+  const idx: number[] = []
+  for (let i = 0; i < levels.length - 1; i++) {
+    const a = i * 2, b = i * 2 + 1, c = (i + 1) * 2, d = (i + 1) * 2 + 1
+    idx.push(a, b, d,  a, d, c)
+  }
   const geo = new THREE.BufferGeometry()
-  geo.setAttribute('position', new THREE.BufferAttribute(positions, 3))
-  geo.setAttribute('uv', new THREE.BufferAttribute(uvs, 2))
-  geo.setIndex(new THREE.BufferAttribute(indices, 1))
+  geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(pos), 3))
+  geo.setAttribute('uv', new THREE.BufferAttribute(new Float32Array(uvs), 2))
+  geo.setIndex(idx)
   return geo
 }
 
@@ -60,8 +66,8 @@ void main() {
   // 높이에 비례해서 바람 세게 (밑동은 고정)
   float windPower = pos.y * pos.y * 4.0;
   vec3 iPos = instanceMatrix[3].xyz;
-  pos.x += sin(uTime * 2.0 + iPos.x * 1.2 + iPos.z * 0.5) * 0.09 * windPower;
-  pos.z += cos(uTime * 1.5 + iPos.z * 1.0 + iPos.x * 0.3) * 0.05 * windPower;
+  pos.x += sin(uTime * 2.0 + iPos.x * 1.2 + iPos.z * 0.5) * 0.06 * windPower;
+  pos.z += cos(uTime * 1.5 + iPos.z * 1.0 + iPos.x * 0.3) * 0.03 * windPower;
 
   gl_Position = projectionMatrix * modelViewMatrix * instanceMatrix * vec4(pos, 1.0);
 }
@@ -178,8 +184,13 @@ export default function GrassCapybaraThree() {
         0,
         (Math.random() - 0.5) * 3.0,
       )
-      dummy.rotation.set(0, Math.random() * Math.PI * 2, 0)
-      dummy.scale.setScalar(0.7 + Math.random() * 0.7)
+      // Y: 랜덤 방향, X: 살짝 랜덤 기울기 (자연스럽게 눕는 느낌)
+      dummy.rotation.set(
+        (Math.random() - 0.5) * 0.3,
+        Math.random() * Math.PI * 2,
+        0,
+      )
+      dummy.scale.setScalar(0.45 + Math.random() * 0.45)
       dummy.updateMatrix()
       grassMesh.setMatrixAt(i, dummy.matrix)
     }
