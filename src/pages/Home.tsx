@@ -76,7 +76,8 @@ const awards = [
     year: '2024',
     tags: ['NLP'],
     link: 'https://www.veritas-a.com/news/articleView.html?idxno=531813',
-    linkLabel: 'Veritas-α',
+    linkLabel: "강원대 컴퓨터공학과 손동주 학생, 'AI 민원 분류 시스템' 개발",
+    linkSource: 'Veritas-α',
   },
   {
     title: 'Outstanding Essay Award, Kangwon National University',
@@ -186,16 +187,19 @@ export default function Home() {
                     <tr key={a.title} className="group align-top transition-colors hover:bg-muted/50">
                       <td className={cn(cvColDate, 'pr-6 py-2 whitespace-nowrap')}>{a.year}</td>
                       <td className="px-6 py-2 min-w-0 leading-relaxed text-foreground/85">
-                        {a.title}
+                        <span>{a.title}</span>
                         {'link' in a && a.link && (
                           <a
                             href={a.link as string}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="ml-2 inline-flex items-center gap-0.5 text-[11px] font-medium text-muted-foreground/70 underline underline-offset-2 decoration-muted-foreground/30 hover:text-foreground hover:decoration-foreground transition-colors"
+                            className="mt-1 flex items-center gap-1 text-[12px] text-muted-foreground/70 underline underline-offset-2 decoration-muted-foreground/30 hover:text-foreground hover:decoration-foreground transition-colors"
                           >
-                            {('linkLabel' in a ? a.linkLabel as string : undefined) ?? 'link'}
-                            <ArrowUpRight className="h-3 w-3" />
+                            <span>{('linkLabel' in a ? a.linkLabel as string : undefined) ?? 'link'}</span>
+                            {'linkSource' in a && a.linkSource && (
+                              <span className="text-muted-foreground/40">· {a.linkSource as string}</span>
+                            )}
+                            <ArrowUpRight className="h-3 w-3 shrink-0" />
                           </a>
                         )}
                       </td>
