@@ -134,7 +134,7 @@ export default function Home() {
 
             {/* Experience */}
             <section className="space-y-5">
-              <h2 className="font-display text-2xl font-semibold tracking-tight text-foreground/95">
+              <h2 className="font-display text-3xl font-semibold tracking-tight text-foreground/95">
                 Experience
               </h2>
               <Separator className="opacity-50" />
@@ -188,7 +188,7 @@ export default function Home() {
 
             {/* Awards */}
             <section className="space-y-5">
-              <h2 className="font-display text-2xl font-semibold tracking-tight text-foreground/95">
+              <h2 className="font-display text-3xl font-semibold tracking-tight text-foreground/95">
                 Honors & Awards
               </h2>
               <Separator className="opacity-50" />
@@ -208,7 +208,7 @@ export default function Home() {
 
             {/* Additional */}
             <section className="space-y-5">
-              <h2 className="font-display text-2xl font-semibold tracking-tight text-foreground/95">
+              <h2 className="font-display text-3xl font-semibold tracking-tight text-foreground/95">
                 Additional
               </h2>
               <Separator className="opacity-50" />
