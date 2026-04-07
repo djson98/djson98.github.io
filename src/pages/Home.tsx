@@ -152,7 +152,7 @@ export default function Home() {
                         </p>
                         <ul className="space-y-1.5 pl-1">
                           {exp.items.map((item) => (
-                            <li key={item.text} className="text-[15px] leading-[1.7] text-foreground/80 sm:text-[17px]">
+                            <li key={item.text} className="text-sm leading-[1.7] text-foreground/75 sm:text-[15px]">
                               {item.projectId ? (
                                 <Link
                                   to={`/projects/${item.projectId}`}
@@ -173,7 +173,7 @@ export default function Home() {
                         <div className="min-w-0">
                           {exp.logo ? (
                             <div className={expDetailGrid}>
-                              <img src={exp.logo} alt="" className="h-10 w-10 shrink-0 object-contain" width={40} height={40} />
+                              <img src={exp.logo} alt="" className="h-10 w-10 shrink-0 object-contain object-left" width={40} height={40} />
                               {detailBody}
                             </div>
                           ) : detailBody}
