@@ -59,6 +59,12 @@ const experience: ExperienceItem[] = [
   },
 ]
 
+const additional = [
+  { title: 'Teaching Assistant, Python Programming', year: '2024 – 2026', tags: ['Teaching'] },
+  { title: 'Teaching Assistant, Web Programming', year: '2024 – 2026', tags: ['Teaching'] },
+  { title: 'Founder, CapybaraLab (registered business)', year: 'Sep 2025', tags: ['Entrepreneurship'] },
+]
+
 const awards = [
   {
     title: 'Honorable Mention, Capstone Project Competition',
@@ -190,6 +196,26 @@ export default function Home() {
                 <CvColumnHead3 left="Date" center="Title" right="Tags" />
                 <ul className="space-y-3">
                   {awards.map((a) => (
+                    <li key={a.title} className={cvGrid3}>
+                      <div className={cvColDate}>{a.year}</div>
+                      <span className="min-w-0 leading-relaxed text-foreground/85">{a.title}</span>
+                      <ProjectTagChips tags={a.tags} className="justify-start sm:justify-end sm:pt-0.5" />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </section>
+
+            {/* Additional */}
+            <section className="space-y-5">
+              <h2 className="font-display text-2xl font-semibold tracking-tight text-foreground/95">
+                Additional
+              </h2>
+              <Separator className="opacity-50" />
+              <div className="space-y-3">
+                <CvColumnHead3 left="Date" center="Title" right="Tags" />
+                <ul className="space-y-3">
+                  {additional.map((a) => (
                     <li key={a.title} className={cvGrid3}>
                       <div className={cvColDate}>{a.year}</div>
                       <span className="min-w-0 leading-relaxed text-foreground/85">{a.title}</span>
