@@ -87,13 +87,13 @@ const awards = [
 const cvGrid3 =
   'group grid grid-cols-1 sm:grid-cols-[minmax(7.5rem,auto)_1fr_minmax(0,5.5rem)] gap-x-6 sm:gap-x-8 gap-y-2 sm:gap-y-1 items-start text-base sm:text-[17px] leading-[1.7] rounded-lg -mx-3 px-3 py-2 transition-colors hover:bg-muted/50'
 const cvColDate =
-  'text-xs sm:text-[13px] text-muted-foreground/60 tabular-nums whitespace-nowrap sm:pt-0.5 font-medium transition-colors group-hover:text-muted-foreground'
+  'text-xs sm:text-[13px] text-muted-foreground/60 tabular-nums whitespace-nowrap font-medium transition-colors group-hover:text-muted-foreground'
 const cvHeader3 =
   'hidden sm:grid sm:grid-cols-[minmax(7.5rem,auto)_1fr_auto] gap-x-6 sm:gap-x-8 pb-2.5 text-[0.65rem] font-semibold uppercase tracking-[0.12em] text-muted-foreground/80'
 
 /** Experience 상세: 로고 열 | 본문 열 (테두리 없음) */
 const expDetailGrid =
-  'grid grid-cols-[minmax(2.75rem,auto)_1fr] gap-x-3 items-start min-w-0'
+  'grid grid-cols-[minmax(2.75rem,auto)_1fr] gap-x-3 items-center min-w-0'
 
 function CvColumnHead3({
   left,
@@ -173,7 +173,7 @@ export default function Home() {
                         <div className="min-w-0">
                           {exp.logo ? (
                             <div className={expDetailGrid}>
-                              <img src={exp.logo} alt="" className="h-12 w-12 shrink-0 object-contain sm:mt-1" width={48} height={48} />
+                              <img src={exp.logo} alt="" className="h-10 w-10 shrink-0 object-contain" width={40} height={40} />
                               {detailBody}
                             </div>
                           ) : detailBody}
